@@ -1,7 +1,6 @@
 import config from '@redux-offline/redux-offline/lib/defaults';
-import { AbyssConfig } from 'index';
 import { AsyncStorage } from 'react-native';
-// import { AppActions } from '../modules/reducer';
+import { AbyssConfig } from '../config';
 import { jsonapiDatastorePersistence } from './jsonapiDatastorePersistence';
 // clear the persist cache when reducerVersion changes (dev mostly)
 AsyncStorage.getItem('reducerVersion')
@@ -18,18 +17,13 @@ export const offlineConfig = Object.assign({}, config, { effect: (effect, action
             return getApiCall(effect.action)(effect.params);
         }
         throw new Error(`Invalid offline action type: ${action.type}`);
-    }, defaultCommit: { type: 'offline/COMMIT' }, defaultRollback: { type: 'offline/ROLLBACK' }, 
-    // persistCallback: () => store.dispatch(AppActions.startup()),
-    persistOptions: {
-        blacklist: AbyssConfig.redux.blacklist,
+    }, defaultCommit: { type: 'offline/COMMIT' }, defaultRollback: { type: 'offline/ROLLBACK' }, persistOptions: {
         transforms: [jsonapiDatastorePersistence],
         debug: __DEV__
-    }, 
-    // for testing
-    discard: () => false });
+    } });
 // tslint:disable-next-line:no-any
 const getApiCall = (action) => {
-    const call = AbyssConfig.redux.offlineCalls[action];
+    const call = AbyssConfig.api.offlineCalls[action];
     if (!call) {
         throw new Error(`Invalid API offline effect: ${action}`);
     }

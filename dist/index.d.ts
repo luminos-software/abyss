@@ -1,16 +1,10 @@
 import '@redux-offline/redux-offline';
-import { AxiosPromise } from '../node_modules/axios';
-export { Api, ApiActions, Repository } from 'api/api';
-export { ReduxUtil } from './redux/util';
-export declare const AbyssConfig: {
-    api: {
-        serverUrl: string;
-        prefix: string;
-        timeout: number;
-    };
-    redux: {
-        reducerVersion: string;
-        blacklist: string[];
-        offlineCalls: Record<string, (x: any) => AxiosPromise<any>>;
-    };
-};
+import * as epics from './redux/offlineEpics';
+export { Api, ApiActions, IApiError, Repository } from './api/api';
+export { AbyssConfig } from './config';
+export { apiMiddleware } from './redux/apiMiddleware';
+export { offlineConfig as defaultOfflineConfig } from './redux/offline';
+export { reducer as offlineReducer, State as OfflineState } from './redux/offlineReducer';
+export { ReduxUtil } from './util/redux';
+export { Arguments, InferFromAxiosReturnType } from './util/types';
+export declare const offlineEpics: typeof epics;

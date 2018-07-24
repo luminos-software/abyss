@@ -1,8 +1,8 @@
 // tslint:disable:no-any
-import { datastore } from 'api/jsonapiStore';
 import { JsonApiDataStoreModel } from 'jsonapi-datastore';
 import R from 'ramda';
 import { createTransform } from 'redux-persist';
+import { datastore } from '../api/jsonapiStore';
 
 const DATASTORE_TYPE = 'JSONAPI_DATASTORE';
 const DATASTORE_ARRAY_TYPE = 'JSONAPI_DATASTORE_ARRAY';

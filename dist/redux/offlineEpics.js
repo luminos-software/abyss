@@ -1,5 +1,5 @@
-import { buildErrorPayload, getSuccessResult } from 'redux/apiMiddleware';
 import { filter, map } from 'rxjs/operators';
+import { buildErrorPayload, getSuccessResult } from './apiMiddleware';
 import { OfflineActions } from './offlineReducer';
 export const offlineRollback = action$ => action$.pipe(filter(OfflineActions.rollback.match), map(action => {
     const meta = action.meta;

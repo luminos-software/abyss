@@ -16,7 +16,6 @@
     "pretty": true,
     "strict": true,
     "esModuleInterop": true,
-    "baseUrl": "src/",
     "resolveJsonModule": true,
     "declaration": true
   },

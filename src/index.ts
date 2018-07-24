@@ -1,18 +1,21 @@
 import '@redux-offline/redux-offline';
-import { AxiosPromise } from '../node_modules/axios';
+import { UIManager } from 'react-native';
+import * as epics from './redux/offlineEpics';
 
-export { Api, ApiActions, Repository } from './api/api';
-export { ReduxUtil } from './redux/util';
+export { Api, ApiActions, IApiError, Repository } from './api/api';
+export { AbyssConfig } from './config';
+export { apiMiddleware } from './redux/apiMiddleware';
+export { offlineConfig as defaultOfflineConfig } from './redux/offline';
+export { reducer as offlineReducer, State as OfflineState } from './redux/offlineReducer';
+export { ReduxUtil } from './util/redux';
+export { Arguments, InferFromAxiosReturnType } from './util/types';
 
-export const AbyssConfig = {
-  api: {
-    serverUrl: '',
-    prefix: '/api/v1',
-    timeout: 4000
-  },
-  redux: {
-    reducerVersion: '0',
-    blacklist: ['volatile'],
-    offlineCalls: {} as Record<string, (x: any) => AxiosPromise>
-  }
-};
+export const offlineEpics = epics;
+
+if (__DEV__) {
+  // for rn-debugger
+  global.XMLHttpRequest = global.originalXMLHttpRequest || global.XMLHttpRequest;
+  global.FormData = global.originalFormData || global.FormData;
+}
+
+UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);

@@ -1,8 +1,7 @@
 import { OfflineAction } from '@redux-offline/redux-offline/lib/types';
-import axios, { AxiosPromise, AxiosRequestConfig } from 'axios';
-import { OfflineReadyCall, OfflineReadyConfig } from 'redux/offline';
+import axios, { AxiosInstance, AxiosPromise, AxiosRequestConfig } from 'axios';
 import { AsyncActionCreators } from 'typescript-fsa';
-import { AbyssConfig } from '..';
+import { AbyssConfig } from '../config';
 
 export interface IApiAction<T, P> {
   type: 'API_CALL';
@@ -15,11 +14,11 @@ export interface IApiAction<T, P> {
   params: P;
 }
 
-export interface IOfflineApiAction<P> extends OfflineAction {
+export interface IOfflineApiAction<A, P> extends OfflineAction {
   type: 'OFFLINE_API_CALL';
   meta: {
     offline: {
-      effect: { action: OfflineReadyCall; params: P; commit: string; rollback: string };
+      effect: { action: A; params: P; commit: string; rollback: string };
     };
   };
 }
@@ -31,21 +30,27 @@ interface IJsonapiRequest<T> {
   };
 }
 
-const api = axios.create({
-  baseURL: `${AbyssConfig.api.serverUrl}${AbyssConfig.api.prefix}`,
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  timeout: AbyssConfig.api.timeout
-});
+let api: AxiosInstance | null = null;
+const getApi = () => {
+  if (!api) {
+    // we defer creation under the assumption that the config will be set before the first request
+    api = axios.create({
+      baseURL: `${AbyssConfig.api.serverUrl}${AbyssConfig.api.prefix}`,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      timeout: AbyssConfig.api.timeout
+    });
+  }
+  return api;
+};
 
 let authToken = '';
-
 export const Api = {
   API_CALL: 'API_CALL',
 
   setAuthToken(value: string): void {
-    api.defaults.headers.common.Authorization = `Token ${value}`;
+    getApi().defaults.headers.common.Authorization = `Token ${value}`;
     authToken = value;
   },
 
@@ -56,30 +61,30 @@ export const Api = {
 
 export class Repository<T> {
   get(path: string) {
-    return api.get<T>(path);
+    return getApi().get<T>(path);
   }
 
   post<R>(path: string, body: IJsonapiRequest<R>) {
-    return api.post<T>(path, body);
+    return getApi().post<T>(path, body);
   }
 
   put(path: string, body: IJsonapiRequest<T>) {
-    return api.put<T>(path, body);
+    return getApi().put<T>(path, body);
   }
 
   patch(path: string, body: IJsonapiRequest<Partial<T>>) {
-    return api.patch<T>(path, body);
+    return getApi().patch<T>(path, body);
   }
 
   delete(path: string) {
-    return api.delete(path);
+    return getApi().delete(path);
   }
 }
 
 // tslint:disable-next-line:no-any
-type Arguments<T> = T extends (args: infer U) => any ? U : any;
+// type Arguments<T> = T extends (args: infer U) => any ? U : any;
 // tslint:disable-next-line:no-any
-type InferFromAxios<T> = T extends AxiosPromise<infer U> ? U : any;
+// type InferFromAxios<T> = T extends AxiosPromise<infer U> ? U : any;
 
 export const ApiActions = {
   directCall<P, S, E>(
@@ -99,12 +104,7 @@ export const ApiActions = {
     };
   },
 
-  offlineCall<
-    A extends OfflineReadyCall,
-    P extends Arguments<OfflineReadyConfig[A]>,
-    S extends InferFromAxios<ReturnType<OfflineReadyConfig[A]>>,
-    E
-  >(action: A, asyncAction: AsyncActionCreators<P, S, E>, params: P): IOfflineApiAction<P> {
+  offlineCall<A, P, S, E>(action: A, asyncAction: AsyncActionCreators<P, S, E>, params: P): IOfflineApiAction<A, P> {
     return {
       type: 'OFFLINE_API_CALL',
       meta: {

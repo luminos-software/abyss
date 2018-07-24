@@ -1,7 +1,7 @@
-import { Api, IApiAction, IApiError } from 'api/api';
 import { AxiosError } from 'axios';
 // import { ErrorNotification } from 'lib/ErrorNotification';
 import { Action, Middleware } from 'redux';
+import { Api, IApiAction, IApiError } from '../api/api';
 import { datastore } from '../api/jsonapiStore';
 
 // tslint:disable-next-line:no-any

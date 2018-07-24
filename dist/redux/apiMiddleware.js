@@ -1,4 +1,4 @@
-import { Api } from 'api/api';
+import { Api } from '../api/api';
 import { datastore } from '../api/jsonapiStore';
 // tslint:disable-next-line:no-any
 const isApiAction = (action) => action.type === Api.API_CALL;

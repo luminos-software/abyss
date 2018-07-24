@@ -1,17 +1,24 @@
 import axios from 'axios';
-import { AbyssConfig } from '..';
-const api = axios.create({
-    baseURL: `${AbyssConfig.api.serverUrl}${AbyssConfig.api.prefix}`,
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    timeout: AbyssConfig.api.timeout
-});
+import { AbyssConfig } from '../config';
+let api = null;
+const getApi = () => {
+    if (!api) {
+        // we defer creation under the assumption that the config will be set before the first request
+        api = axios.create({
+            baseURL: `${AbyssConfig.api.serverUrl}${AbyssConfig.api.prefix}`,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            timeout: AbyssConfig.api.timeout
+        });
+    }
+    return api;
+};
 let authToken = '';
 export const Api = {
     API_CALL: 'API_CALL',
     setAuthToken(value) {
-        api.defaults.headers.common.Authorization = `Token ${value}`;
+        getApi().defaults.headers.common.Authorization = `Token ${value}`;
         authToken = value;
     },
     getAuthToken() {
@@ -20,21 +27,25 @@ export const Api = {
 };
 export class Repository {
     get(path) {
-        return api.get(path);
+        return getApi().get(path);
     }
     post(path, body) {
-        return api.post(path, body);
+        return getApi().post(path, body);
     }
     put(path, body) {
-        return api.put(path, body);
+        return getApi().put(path, body);
     }
     patch(path, body) {
-        return api.patch(path, body);
+        return getApi().patch(path, body);
     }
     delete(path) {
-        return api.delete(path);
+        return getApi().delete(path);
     }
 }
+// tslint:disable-next-line:no-any
+// type Arguments<T> = T extends (args: infer U) => any ? U : any;
+// tslint:disable-next-line:no-any
+// type InferFromAxios<T> = T extends AxiosPromise<infer U> ? U : any;
 export const ApiActions = {
     directCall(promise, asyncAction, params) {
         return {

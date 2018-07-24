@@ -2,9 +2,8 @@ import { OfflineAction } from '@redux-offline/redux-offline/lib/types';
 import { AxiosResponse } from 'axios';
 import { Action } from 'redux';
 import { Epic } from 'redux-observable';
-import { buildErrorPayload, getSuccessResult } from 'redux/apiMiddleware';
-import { OfflineReadyCall } from 'redux/offline';
 import { filter, map } from 'rxjs/operators';
+import { buildErrorPayload, getSuccessResult } from './apiMiddleware';
 import { OfflineActions } from './offlineReducer';
 
 interface IOfflineActionMeta {
@@ -12,7 +11,7 @@ interface IOfflineActionMeta {
 }
 
 interface IEffect {
-  action: OfflineReadyCall;
+  action: string;
   params: {};
   commit: string;
   rollback: string;
