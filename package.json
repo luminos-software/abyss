@@ -1,0 +1,47 @@
+{
+  "name": "abyss",
+  "version": "0.1.0",
+  "description": "Base library for Luminos React Native apps",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rimraf dist/ && tsc",
+    "lint": "tsc --noEmit && tslint 'src/**/*.ts*'",
+    "postinstall": "yarn build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/luminos-software/abyss.git"
+  },
+  "author": "Radu Batori",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/luminos-software/abyss/issues"
+  },
+  "homepage": "https://github.com/luminos-software/abyss#readme",
+  "dependencies": {
+    "@redux-offline/redux-offline": "2.4.0",
+    "axios": "0.18.0",
+    "jsonapi-datastore": "0.4.0-beta",
+    "ramda": "0.25.0",
+    "redux": "4.0.0",
+    "redux-observable": "1.0.0",
+    "rxjs": "6.2.2",
+    "typescript-fsa": "2.5.0",
+    "typescript-fsa-reducers": "^0.4.5"
+  },
+  "devDependencies": {
+    "@types/ramda": "0.25.35",
+    "@types/react-native": "^0.56.4",
+    "babel-plugin-module-resolver": "3.1.1",
+    "babel-preset-react-native": "4.0.0",
+    "prettier": "1.13.7",
+    "rimraf": "2.6.2",
+    "tslint": "5.11.0",
+    "tslint-config-prettier": "1.14.0",
+    "tslint-eslint-rules": "5.3.1",
+    "tslint-react": "3.6.0",
+    "typescript": "2.9.2"
+  }
+}
