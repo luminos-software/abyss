@@ -14,7 +14,7 @@ export interface IApiAction<T, P> {
   params: P;
 }
 
-export interface IOfflineApiAction<A, P> extends OfflineAction {
+interface IOfflineApiAction<A, P> extends OfflineAction {
   type: 'OFFLINE_API_CALL';
   meta: {
     offline: {
@@ -47,8 +47,6 @@ const getApi = () => {
 
 let authToken = '';
 export const Api = {
-  API_CALL: 'API_CALL',
-
   setAuthToken(value: string): void {
     getApi().defaults.headers.common.Authorization = `Token ${value}`;
     authToken = value;
@@ -80,11 +78,6 @@ export class Repository<T> {
     return getApi().delete(path);
   }
 }
-
-// tslint:disable-next-line:no-any
-// type Arguments<T> = T extends (args: infer U) => any ? U : any;
-// tslint:disable-next-line:no-any
-// type InferFromAxios<T> = T extends AxiosPromise<infer U> ? U : any;
 
 export const ApiActions = {
   directCall<P, S, E>(

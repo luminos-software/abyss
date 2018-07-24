@@ -3,9 +3,10 @@ import { AxiosError } from 'axios';
 import { Action, Middleware } from 'redux';
 import { Api, IApiAction, IApiError } from '../api/api';
 import { datastore } from '../api/jsonapiStore';
+import { AbyssConfig } from '../config';
 
 // tslint:disable-next-line:no-any
-const isApiAction = (action: Action): action is IApiAction<any, any> => action.type === Api.API_CALL;
+const isApiAction = (action: Action): action is IApiAction<any, any> => action.type === 'API_CALL';
 
 export const apiMiddleware: Middleware = () => next => action => {
   if (!isApiAction(action)) {
@@ -18,10 +19,10 @@ export const apiMiddleware: Middleware = () => next => action => {
   action.promise
     .then(payload => {
       // insanely ugly hack, but I have no idea at this time how to ensure that another api call
-      // does not get started between LOG_IN_DONE and the `action that would set the token
-      // if (['login/LOG_IN_DONE', 'login/CREATE_USER_ACCOUNT_DONE'].includes(action.actions.success.type)) {
-      //   Api.setAuthToken(payload.data.data.attributes.auth_token);
-      // }
+      // does not get started between LOG_IN_DONE and the action that would set the token
+      if (AbyssConfig.api.authCalls.includes(action.actions.success.type)) {
+        Api.setAuthToken(payload.data.data.attributes.auth_token);
+      }
 
       next({
         payload: { result: getSuccessResult(payload.data), params: action.params, offline: false },

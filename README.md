@@ -113,6 +113,10 @@ AbyssConfig.api.serverUrl = Config.SERVER_URL;
 AbyssConfig.api.prefix: '/api/v1';
 AbyssConfig.api.timeout = 4000;
 
+// these calls will reset the auth token; an `auth_token` attribute is expected on the response
+AbyssConfig.api.authCalls = ['login/LOG_IN_DONE', 'login/CREATE_USER_ACCOUNT_DONE'];
+
+// manually set the auth token
 Api.setAuthToken(getUniqueID());
 ```
 
