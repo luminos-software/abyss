@@ -3,7 +3,8 @@ export const AbyssConfig = {
         serverUrl: '',
         prefix: '/api/v1',
         timeout: 4000,
-        offlineCalls: {}
+        offlineCalls: {},
+        authCalls: []
     },
     redux: {
         reducerVersion: '0'

@@ -17,7 +17,7 @@ export interface IApiAction<T, P> {
     promise: AxiosPromise<T>;
     params: P;
 }
-export interface IOfflineApiAction<A, P> extends OfflineAction {
+interface IOfflineApiAction<A, P> extends OfflineAction {
     type: 'OFFLINE_API_CALL';
     meta: {
         offline: {
@@ -37,7 +37,6 @@ interface IJsonapiRequest<T> {
     };
 }
 export declare const Api: {
-    API_CALL: string;
     setAuthToken(value: string): void;
     getAuthToken(): string;
 };

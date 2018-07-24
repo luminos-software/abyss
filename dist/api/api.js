@@ -16,7 +16,6 @@ const getApi = () => {
 };
 let authToken = '';
 export const Api = {
-    API_CALL: 'API_CALL',
     setAuthToken(value) {
         getApi().defaults.headers.common.Authorization = `Token ${value}`;
         authToken = value;
@@ -42,10 +41,6 @@ export class Repository {
         return getApi().delete(path);
     }
 }
-// tslint:disable-next-line:no-any
-// type Arguments<T> = T extends (args: infer U) => any ? U : any;
-// tslint:disable-next-line:no-any
-// type InferFromAxios<T> = T extends AxiosPromise<infer U> ? U : any;
 export const ApiActions = {
     directCall(promise, asyncAction, params) {
         return {

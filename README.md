@@ -98,6 +98,19 @@ Set a new `reducerVersion` in `config/abyss.ts`:
 AbyssConfig.redux.reducerVersion = '1'; // default 0
 ```
 
+### Theme metrics
+
+In `theme/metrics.ts`:
+
+```typescript
+import { getMetrics } from 'abyss';
+
+export const metrics = {
+  ...getMetrics(),
+  otherCustomMetric: 10
+};
+```
+
 ## Configuration
 
 ### Direct API interaction
@@ -107,9 +120,9 @@ API configuration (`config/abyss.ts` usually):
 ```typescript
 import { AbyssConfig, Api } from 'abyss';
 
+// mandatory, everything else is optional
 AbyssConfig.api.serverUrl = Config.SERVER_URL;
 
-// optional
 AbyssConfig.api.prefix: '/api/v1';
 AbyssConfig.api.timeout = 4000;
 

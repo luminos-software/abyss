@@ -5,6 +5,7 @@ export declare const AbyssConfig: {
         prefix: string;
         timeout: number;
         offlineCalls: Record<string, (...args: any[]) => AxiosPromise<any>>;
+        authCalls: string[];
     };
     redux: {
         reducerVersion: string;

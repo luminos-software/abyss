@@ -6,6 +6,7 @@ export { AbyssConfig } from './config';
 export { apiMiddleware } from './redux/apiMiddleware';
 export { offlineConfig as defaultOfflineConfig } from './redux/offline';
 export { reducer as offlineReducer } from './redux/offlineReducer';
+export { getMetrics } from './theme/metrics';
 export { ReduxUtil } from './util/redux';
 export const offlineEpics = epics;
 if (__DEV__) {
