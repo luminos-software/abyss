@@ -1,10 +1,32 @@
-## Abyss - library containing code that should be used by all Luminos React Native projects
+## Abyss - code that should be used by all Luminos React Native projects
 
 ### Why _Abyss_?
 
-For now the library is supposed to be an endless pit of infrastructure code that can be reused throughout projects. Possibly it will evolve in time into separate packages for specific purposes.
+For now the library is supposed to be an endless pit of infrastructure code that can be reused throughout projects. Possibly it will evolve into separate packages for specific purposes, or I will spend some time organizing the code better, but for now it is more of a dump :).
 
-### Redux, API, Offline support
+### Features
+
+## Direct API interaction
+
+API configuration (`config/abyss.ts` usually):
+
+```typescript
+import { AbyssConfig } from 'abyss';
+
+AbyssConfig.api.serverUrl = Config.SERVER_URL;
+
+// optional
+AbyssConfig.api.prefix: '/api/v1';
+AbyssConfig.api.timeout = 4000;
+```
+
+After that you can dispatch API call actions:
+
+```typescript
+ApiActions.directCall(alarmRepository.toggleAlarm({ alarmActive: false }), DatastoreActions.updateAlarm, {});
+```
+
+### Configuration
 
 Typical Redux store creation:
 
