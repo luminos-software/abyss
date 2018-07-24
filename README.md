@@ -69,6 +69,33 @@ export const persistDay: Epic<Action, Action, IRootState> = action$ =>
   );
 ```
 
+### Offline support
+
+Mark the repository action as offline-capable in `config/abyss.ts`:
+
+```typescript
+const offlineCalls = {
+  'dayRepository.persistDay': dayRepository.persistDay
+};
+AbyssConfig.api.offlineCalls = offlineCalls;
+```
+
+And instead of dispatching `ApiActions.directCall`, `ApiActions.offlineCall` should be used:
+
+```typescript
+ApiActions.offlineCall('dayRepository.persistDay', DatastoreActions.refreshDay, {
+  day: state$.value.home.currentDay
+});
+```
+
+### Clean the redux store
+
+Set a new `reducerVersion` in `config/abyss.ts`:
+
+```typescript
+AbyssConfig.redux.reducerVersion = '1'; // default 0
+```
+
 ## Configuration
 
 ### Direct API interaction
