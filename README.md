@@ -52,7 +52,9 @@ const initialState: State = {
 };
 
 export const reducer = reducerWithInitialState(initialState)
-.caseWithAction(DatastoreActions.refreshDay, (state, action) => ({ ...state, day: action.payload })).build();
+  .caseWithAction(DatastoreActions.refreshDay.done, (state, action) => ({ ...state, day: action.payload }))
+  .case(DatastoreActions.refreshDay.failed, state => ({ ...state, day: null }))
+  .build();
 ```
 
 Then dispatch an API call action (`epics/homeEpics.ts`):
