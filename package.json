@@ -25,15 +25,18 @@
     "axios": "0.18.0",
     "jsonapi-datastore": "0.4.0-beta",
     "ramda": "0.25.0",
+    "react-navigation-backhandler": "1.1.1",
     "redux": "4.0.0",
     "redux-observable": "1.0.0",
     "rxjs": "6.2.2",
     "typescript-fsa": "2.5.0",
-    "typescript-fsa-reducers": "^0.4.5"
+    "typescript-fsa-reducers": "0.4.5"
   },
   "devDependencies": {
     "@types/ramda": "0.25.35",
-    "@types/react-native": "^0.56.4",
+    "@types/react": "16.4.7",
+    "@types/react-native": "0.56.4",
+    "@types/react-navigation": "2.0.12",
     "babel-plugin-module-resolver": "3.1.1",
     "babel-preset-react-native": "4.0.0",
     "prettier": "1.13.7",

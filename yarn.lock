@@ -13,15 +13,28 @@
   version "0.25.35"
   resolved "https://registry.yarnpkg.com/@types/ramda/-/ramda-0.25.35.tgz#94500755a8dd7365f80e9e99e31331add41e9880"
 
-"@types/react-native@^0.56.4":
+"@types/react-native@*", "@types/react-native@0.56.4":
   version "0.56.4"
   resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.56.4.tgz#2643ca2a9a81e30da9fde96cfd8587fca4e3c19d"
   dependencies:
     "@types/react" "*"
 
+"@types/react-navigation@2.0.12":
+  version "2.0.12"
+  resolved "https://registry.yarnpkg.com/@types/react-navigation/-/react-navigation-2.0.12.tgz#90aa05d1b952193d62ee936b4cd773f886d4f13a"
+  dependencies:
+    "@types/react" "*"
+    "@types/react-native" "*"
+
 "@types/react@*":
   version "16.4.6"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.4.6.tgz#5024957c6bcef4f02823accf5974faba2e54fada"
+  dependencies:
+    csstype "^2.2.0"
+
+"@types/react@16.4.7":
+  version "16.4.7"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.4.7.tgz#f33f6d759a7e1833befa15224d68942d178a5a3f"
   dependencies:
     csstype "^2.2.0"
 
@@ -735,6 +748,10 @@ react-deep-force-update@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/react-deep-force-update/-/react-deep-force-update-1.1.1.tgz#bcd31478027b64b3339f108921ab520b4313dc2c"
 
+react-navigation-backhandler@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-navigation-backhandler/-/react-navigation-backhandler-1.1.1.tgz#a5cbd414acc503ed79bd10d27fcd71c4d1af476d"
+
 react-proxy@^1.1.7:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/react-proxy/-/react-proxy-1.1.8.tgz#9dbfd9d927528c3aa9f444e4558c37830ab8c26a"
@@ -889,7 +906,7 @@ tsutils@^2.13.1, tsutils@^2.27.2:
   dependencies:
     tslib "^1.8.1"
 
-typescript-fsa-reducers@^0.4.5:
+typescript-fsa-reducers@0.4.5:
   version "0.4.5"
   resolved "https://registry.yarnpkg.com/typescript-fsa-reducers/-/typescript-fsa-reducers-0.4.5.tgz#58fffb2f6eeca6817c2f656b7e7df2cb1c9d1f84"
   dependencies:

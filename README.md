@@ -111,6 +111,27 @@ export const metrics = {
 };
 ```
 
+### Navigation
+
+Create navigators:
+
+```typescript
+import { createTabNavigator, createStackNavigator } from 'abyss';
+
+export const Navigator = createTabNavigator({ Home: HomeScreen });
+```
+
+Create screens:
+
+```typescript
+import { StackScreen } from 'abyss';
+
+// also StackScreen.withoutHeader
+export const MedicinesScreen = StackScreen.withDefaultHeader(MedicinesConnected, {
+  headerTitle: 'Medicines'
+});
+```
+
 ## Configuration
 
 ### Direct API interaction
@@ -206,4 +227,13 @@ export interface IRootState {
   home: HomeState;
   offline: OfflineState;
 }
+```
+
+### Navigation header styles
+
+```typescript
+// config/abyss.ts
+import { StackScreen } from 'abyss';
+
+StackScreen.setDefaults({ headerStyle: { backgroundColor: 'red' } });
 ```
