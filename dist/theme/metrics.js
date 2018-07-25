@@ -5,11 +5,11 @@ const STATUSBAR_DEFAULT_HEIGHT = Platform.select({ ios: 20, android: 0 });
 // iphone x has a different statusbar height
 if (Platform.OS === 'ios') {
     // this might be private
-    NativeModules.StatusBarManager.getHeight(({ height }) => {
-        if (height === STATUSBAR_DEFAULT_HEIGHT) {
+    NativeModules.StatusBarManager.getHeight((data) => {
+        if (data.height === STATUSBAR_DEFAULT_HEIGHT) {
             return;
         }
-        const diff = height - STATUSBAR_DEFAULT_HEIGHT;
+        const diff = data.height - STATUSBAR_DEFAULT_HEIGHT;
         metrics.header.padding += diff;
         metrics.header.totalHeight += diff;
         metrics.statusBar.height += diff;
@@ -24,7 +24,7 @@ const metrics = {
         totalHeight: HEADER_HEIGHT + STATUSBAR_DEFAULT_HEIGHT
     },
     statusBar: { height: STATUSBAR_DEFAULT_HEIGHT },
-    screen: { height: height - HEADER_HEIGHT - STATUSBAR_DEFAULT_HEIGHT, width: width }
+    screen: { height: height - HEADER_HEIGHT - STATUSBAR_DEFAULT_HEIGHT, width }
 };
 export const getMetrics = () => metrics;
 //# sourceMappingURL=metrics.js.map

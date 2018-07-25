@@ -1,6 +1,5 @@
 {
   "extends": ["tslint:latest", "tslint-react", "tslint-config-prettier", "tslint-eslint-rules"],
-  "rulesDirectory": ["./scripts/tslint", "node_modules/react-native-auto-stylesheet/tslint"],
   "rules": {
     "curly": true,
     "class-name": true,
@@ -24,19 +23,7 @@
     "no-require-imports": true,
     "no-shadowed-variable": true,
     "no-string-literal": true,
-    "no-submodule-imports": [
-      true,
-      "redux-persist",
-      "redux-devtools-extension",
-      "redux-saga",
-      "lib",
-      "navigation",
-      "redux",
-      "repositories",
-      "services",
-      "util",
-      "config"
-    ],
+    "no-submodule-imports": [true, "redux-persist", "redux-devtools-extension", "@redux-offline/redux-offline", "rxjs"],
     "no-unused-expression": [true, "allow-fast-null-checks"],
     "no-var-keyword": true,
     "object-literal-sort-keys": false,
@@ -51,9 +38,6 @@
     "switch-default": true,
     "typedef": true,
     "jsx-no-bind": true,
-    "no-implicit-dependencies": false,
-    "socialarm-no-rn-text": true,
-    "luminos-no-relative-imports": true,
-    "no-rn-stylesheet-import": true
+    "no-implicit-dependencies": false
   }
 }
