@@ -167,7 +167,7 @@ export const ApiActions = {
 ### Typical Redux store
 
 ```typescript
-import { apiMiddleware, defaultOfflineConfig, offlineEpics, ReduxUtil } from 'abyss';
+import { apiMiddleware, defaultOfflineConfig, offlineEpics } from 'abyss';
 
 const epicMiddleware = createEpicMiddleware<Action, Action, IRootState>();
 
@@ -188,7 +188,7 @@ const reducer: Reducer<IRootState> = combineReducers(reducers);
 
 export const store: Store<IRootState> = createStore(reducer, enhancer);
 
-epicMiddleware.run(ReduxUtil.combineEpics(offlineEpics, epics));
+epicMiddleware.run(combineEpics(...R.values(R.mergeAll([offlineEpics, epics]))));
 ```
 
 ### Redux offline reducer
