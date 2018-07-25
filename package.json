@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@types/ramda": "0.25.35",
-    "@types/react": "16.4.7",
+    "@types/react": "*",
     "@types/react-native": "0.56.4",
     "@types/react-navigation": "2.0.12",
     "babel-plugin-module-resolver": "3.1.1",
