@@ -2,6 +2,7 @@ import '@redux-offline/redux-offline';
 import { UIManager } from 'react-native';
 import * as epics from './redux/offlineEpics';
 export { Api, ApiActions, Repository } from './api/api';
+export { datastore } from './api/jsonapiStore';
 export { AbyssConfig } from './config';
 export { createStackNavigator, StackScreen } from './navigation/navigators/StackNavigator';
 export { createTabNavigator } from './navigation/navigators/TabNavigator';

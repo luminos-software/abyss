@@ -37,8 +37,8 @@ interface IJsonapiRequest<T> {
     };
 }
 export declare const Api: {
-    setAuthToken(value: string): void;
-    getAuthToken(): string;
+    setAuthToken(value: string | null): void;
+    getAuthToken(): string | null;
 };
 export declare class Repository<T> {
     get(path: string): AxiosPromise<T>;

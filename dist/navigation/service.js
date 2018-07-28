@@ -1,4 +1,4 @@
-import { NavigationActions, StackActions } from 'react-navigation';
+import { DrawerActions, NavigationActions, StackActions } from 'react-navigation';
 let navigator = null;
 // tslint:disable-next-line:no-any
 const getNavigationScreen = (navState) => {
@@ -13,6 +13,8 @@ const dispatch = (action) => {
         // tslint:disable-next-line
         console.log(`Navigation action: ${action.type} ${action.routeName}`);
     }
+    // TODO: fix this
+    // tslint:disable-next-line:no-any
     return (navigator && navigator.dispatch(action)) || false;
 };
 export const Navigation = {
@@ -36,6 +38,15 @@ export const Navigation = {
     },
     reset(options) {
         return dispatch(StackActions.reset(options));
+    },
+    toggleDrawer() {
+        return dispatch(DrawerActions.toggleDrawer());
+    },
+    openDrawer() {
+        return dispatch(DrawerActions.openDrawer());
+    },
+    closeDrawer() {
+        return dispatch(DrawerActions.closeDrawer());
     }
 };
 //# sourceMappingURL=service.js.map

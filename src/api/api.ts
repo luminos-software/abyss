@@ -45,14 +45,14 @@ const getApi = () => {
   return api;
 };
 
-let authToken = '';
+let authToken: string | null = '';
 export const Api = {
-  setAuthToken(value: string): void {
+  setAuthToken(value: string | null): void {
     getApi().defaults.headers.common.Authorization = `Token ${value}`;
     authToken = value;
   },
 
-  getAuthToken(): string {
+  getAuthToken() {
     return authToken;
   }
 };
