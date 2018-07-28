@@ -14,7 +14,7 @@ export const apiMiddleware: Middleware = () => next => action => {
     return action;
   }
 
-  next({ type: action.actions.start.type });
+  next({ type: action.actions.start.type, payload: action.params });
 
   action.promise
     .then(payload => {

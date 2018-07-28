@@ -8,7 +8,7 @@ export const apiMiddleware = () => next => action => {
         next(action);
         return action;
     }
-    next({ type: action.actions.start.type });
+    next({ type: action.actions.start.type, payload: action.params });
     action.promise
         .then(payload => {
         // insanely ugly hack, but I have no idea at this time how to ensure that another api call

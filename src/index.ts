@@ -12,6 +12,8 @@ export { apiMiddleware } from './redux/apiMiddleware';
 export { offlineConfig as defaultOfflineConfig } from './redux/offline';
 export { reducer as offlineReducer, State as OfflineState } from './redux/offlineReducer';
 export { getMetrics } from './theme/metrics';
+export { transloaditMiddleware } from './transloadit/middleware';
+export { Transloadit } from './transloadit/service';
 export { Arguments, InferFromAxiosReturnType } from './util/types';
 
 export const offlineEpics = epics;

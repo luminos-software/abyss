@@ -7,6 +7,7 @@ import {
   NavigationNavigateActionPayload,
   NavigationOpenDrawerAction,
   NavigationResetActionPayload,
+  NavigationState,
   NavigationToggleDrawerAction,
   StackActions
 } from 'react-navigation';
@@ -20,11 +21,10 @@ type NavigationActionHack =
   | NavigationOpenDrawerAction
   | NavigationCloseDrawerAction;
 
-// tslint:disable-next-line:no-any
-const getNavigationScreen = (navState: any): string => {
+const getNavigationScreen = (navState: NavigationState): string => {
   const route = navState.routes[navState.index];
   if (route.index !== undefined) {
-    return getNavigationScreen(route);
+    return getNavigationScreen(route as NavigationState);
   }
   return route.routeName;
 };
@@ -44,12 +44,15 @@ export const Navigation = {
     navigator = navigationContainer;
   },
 
-  getCurrentScreen() {
-    if (!navigator) {
-      return null;
+  getCurrentScreen(navState?: NavigationState) {
+    if (!navState) {
+      if (!navigator) {
+        return null;
+      }
+      navState = (navigator.state as any).nav as NavigationState; // tslint:disable-line:no-any
     }
 
-    return getNavigationScreen((navigator.state as any).nav); // tslint:disable-line:no-any
+    return getNavigationScreen(navState);
   },
 
   dispatch(action: NavigationActionHack) {

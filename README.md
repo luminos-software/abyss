@@ -132,6 +132,19 @@ export const MedicinesScreen = StackScreen.withDefaultHeader(MedicinesConnected,
 });
 ```
 
+### Transloadit
+
+Simply dispatch an action:
+
+```typescript
+  Transloadit.action(
+      uri: string,
+      template: string,
+      asyncAction: AsyncActionCreators<P, S, E>,
+      extraParams: Record<string, string> = {}
+  )
+```
+
 ## Configuration
 
 ### Direct API interaction
@@ -208,6 +221,7 @@ const enhancer: StoreEnhancer<IRootState> = compose(
 const reducer: Reducer<IRootState> = combineReducers(reducers);
 
 export const store: Store<IRootState> = createStore(reducer, enhancer);
+AbyssConfig.redux.store = store;
 
 epicMiddleware.run(combineEpics(...R.values(R.mergeAll([offlineEpics, epics]))));
 ```
@@ -236,4 +250,25 @@ export interface IRootState {
 import { StackScreen } from 'abyss';
 
 StackScreen.setDefaults({ headerStyle: { backgroundColor: 'red' } });
+```
+
+### Transloadit
+
+```typescript
+// redux/store.ts
+import { transloaditMiddleware } from 'abyss';
+...
+applyMiddleware(apiMiddleware, transloaditMiddleware, epicMiddleware, loggerMiddleware)
+...
+
+// config/abyss.ts
+AbyssConfig.transloadit.key = Config.TRANSLOADIT_KEY;
+AbyssConfig.transloadit.secret = Config.TRANSLOADIT_SECRET;
+AbyssConfig.transloadit.templates = {
+  image: Config.TRANSLOADIT_IMAGE_TEMPLATE,
+  video: Config.TRANSLOADIT_VIDEO_TEMPLATE,
+  profile: Config.TRANSLOADIT_PROFILE_IMAGE_TEMPLATE
+};
+AbyssConfig.transloadit.progressAction = VolatileActions.updateUploadProgress;
+AbyssConfig.transloadit.notifiyUrl = `${Config.SERVER_URL}/transloadit/file_upload`;
 ```

@@ -1,6 +1,5 @@
 import { DrawerActions, NavigationActions, StackActions } from 'react-navigation';
 let navigator = null;
-// tslint:disable-next-line:no-any
 const getNavigationScreen = (navState) => {
     const route = navState.routes[navState.index];
     if (route.index !== undefined) {
@@ -21,11 +20,14 @@ export const Navigation = {
     setNavigator(navigationContainer) {
         navigator = navigationContainer;
     },
-    getCurrentScreen() {
-        if (!navigator) {
-            return null;
+    getCurrentScreen(navState) {
+        if (!navState) {
+            if (!navigator) {
+                return null;
+            }
+            navState = navigator.state.nav; // tslint:disable-line:no-any
         }
-        return getNavigationScreen(navigator.state.nav); // tslint:disable-line:no-any
+        return getNavigationScreen(navState);
     },
     dispatch(action) {
         return dispatch(action);
