@@ -1,20 +1,14 @@
-import '@redux-offline/redux-offline';
 import { UIManager } from 'react-native';
-import * as epics from './redux/offlineEpics';
 export { Api, ApiActions, Repository } from './api/api';
 export { datastore } from './api/jsonapiStore';
 export { AbyssConfig } from './config';
 export { createStackNavigator, StackScreen } from './navigation/navigators/StackNavigator';
 export { createTabNavigator } from './navigation/navigators/TabNavigator';
 export { Navigation } from './navigation/service';
-export { apiMiddleware } from './redux/apiMiddleware';
-export { offlineConfig as defaultOfflineConfig } from './redux/offline';
-export { reducer as offlineReducer } from './redux/offlineReducer';
+export { createReduxStore } from './redux/createStore';
 export { getMetrics } from './theme/metrics';
-export { transloaditMiddleware } from './transloadit/middleware';
 export { Transloadit } from './transloadit/service';
 export { DatastoreUtil } from './util/datastore';
-export const offlineEpics = epics;
 if (__DEV__) {
     // for rn-debugger
     global.XMLHttpRequest = global.originalXMLHttpRequest || global.XMLHttpRequest;
