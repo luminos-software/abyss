@@ -147,6 +147,26 @@ Simply dispatch an action:
 
 ## Configuration
 
+### Tsconfig and tslint
+
+```json
+// tsconfig.json
+{
+  "extends": "./node_modules/abyss/config/tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "artifacts",
+    "baseUrl": "src/"
+  },
+  "exclude": ["android", "ios", "build", "node_modules", "scripts", "assets"]
+}
+
+// tslint.json
+{
+  "extends": "./node_modules/abyss/config/tslint.json"
+}
+```
+
 ### Direct API interaction
 
 API configuration (`config/abyss.ts` usually):
