@@ -201,40 +201,32 @@ export const ApiActions = {
 ### Typical Redux store
 
 ```typescript
-import { apiMiddleware, defaultOfflineConfig, offlineEpics } from 'abyss';
+import { createReduxStore } from 'abyss';
+import { Store } from 'redux';
+import * as epics from '../epics';
+import { AppActions } from '../modules/reducer';
+import { IRootState, reducers } from './reducers';
 
-const epicMiddleware = createEpicMiddleware<Action, Action, IRootState>();
-
-const offlineEnhancer = offline({
-  ...defaultOfflineConfig,
-  persistCallback: () => store.dispatch(AppActions.startup()),
-  persistOptions: {
-    blacklist: ['volatile', 'home']
-  }
-  // other redux-offline settings
+export const store: Store<IRootState> = createReduxStore(epics, reducers, {
+  offline: {
+    persistCallback: () => store.dispatch(AppActions.startup()),
+    persistOptions: {
+      blacklist: ['volatile', 'hive', 'home', 'camera', 'welcome']
+    }
+  },
+  logger: true,
+  transloadit: true
 });
-
-const enhancer: StoreEnhancer<IRootState> = compose(
-  offlineEnhancer,
-  applyMiddleware(apiMiddleware, epicMiddleware)
-);
-const reducer: Reducer<IRootState> = combineReducers(reducers);
-
-export const store: Store<IRootState> = createStore(reducer, enhancer);
-AbyssConfig.redux.store = store;
-
-epicMiddleware.run(combineEpics(...R.values(R.mergeAll([offlineEpics, epics]))));
 ```
 
-### Redux offline reducer
+### Redux offline state
 
 ```typescript
-import { offlineReducer, OfflineState } from 'abyss';
+import { OfflineState } from 'abyss';
 import { reducer as homeReducer, State as HomeState } from '../modules/home/reducer';
 
 export const reducers = {
-  home: homeReducer,
-  offline: offlineReducer
+  home: homeReducer
 };
 
 export interface IRootState {

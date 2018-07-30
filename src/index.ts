@@ -11,6 +11,7 @@ export { State as OfflineState } from './redux/offlineReducer';
 export { getMetrics } from './theme/metrics';
 export { Transloadit } from './transloadit/service';
 export { DatastoreUtil } from './util/datastore';
+export { EmailUtil } from './util/email';
 export { Arguments, InferFromAxiosReturnType } from './util/types';
 
 if (__DEV__) {

@@ -3,7 +3,6 @@ import R from 'ramda';
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import { devToolsEnhancer } from 'redux-devtools-extension/developmentOnly';
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
-import { AbyssConfig } from '../config';
 import { transloaditMiddleware } from '../transloadit/middleware';
 import { apiMiddleware } from './apiMiddleware';
 import { loggerMiddleware } from './loggerMiddleware';
@@ -27,9 +26,10 @@ export function createReduxStore(epics, reducers, config) {
     ]);
     const enhancer = compose(...enhancers);
     const reducer = combineReducers(reducers);
-    const store = createStore(reducer, enhancer);
-    AbyssConfig.redux.store = store;
+    const newStore = createStore(reducer, enhancer);
+    store = newStore;
     epicMiddleware.run(combineEpics(...R.values(R.mergeAll([offlineEpics, epics]))));
-    return store;
+    return newStore;
 }
+export let store = null;
 //# sourceMappingURL=createStore.js.map

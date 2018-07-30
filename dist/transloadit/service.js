@@ -3,6 +3,7 @@ import moment from 'moment';
 import FetchBlob from 'react-native-fetch-blob';
 import { Api } from '../api/api';
 import { AbyssConfig } from '../config';
+import { store } from '../redux/createStore';
 const API_URL = 'https://api2.transloadit.com';
 const generateParams = (template) => {
     const expiresAt = moment()
@@ -50,6 +51,6 @@ export const Transloadit = {
     }
 };
 const dispatch = (file, written, total) => AbyssConfig.transloadit.progressAction &&
-    AbyssConfig.redux.store &&
-    AbyssConfig.redux.store.dispatch(AbyssConfig.transloadit.progressAction({ file, written, total }));
+    store &&
+    store.dispatch(AbyssConfig.transloadit.progressAction({ file, written, total }));
 //# sourceMappingURL=service.js.map

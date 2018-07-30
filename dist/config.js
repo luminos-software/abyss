@@ -9,8 +9,7 @@ export const AbyssConfig = {
         authCalls: []
     },
     redux: {
-        reducerVersion: '0',
-        store: null
+        reducerVersion: '0'
     },
     transloadit: {
         key: '',

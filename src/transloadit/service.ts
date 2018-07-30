@@ -4,6 +4,7 @@ import FetchBlob from 'react-native-fetch-blob';
 import { AsyncActionCreators } from 'typescript-fsa';
 import { Api } from '../api/api';
 import { AbyssConfig } from '../config';
+import { store } from '../redux/createStore';
 
 const API_URL = 'https://api2.transloadit.com';
 
@@ -78,5 +79,5 @@ export const Transloadit = {
 
 const dispatch = (file: string, written: number, total: number) =>
   AbyssConfig.transloadit.progressAction &&
-  AbyssConfig.redux.store &&
-  AbyssConfig.redux.store.dispatch(AbyssConfig.transloadit.progressAction({ file, written, total }));
+  store &&
+  store.dispatch(AbyssConfig.transloadit.progressAction({ file, written, total }));

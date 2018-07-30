@@ -1,5 +1,4 @@
 import { AxiosPromise } from 'axios';
-import { Store } from 'redux';
 import { ActionCreator } from 'typescript-fsa';
 
 // tslint:disable:no-object-literal-type-assertion
@@ -13,8 +12,7 @@ export const AbyssConfig = {
     authCalls: [] as string[]
   },
   redux: {
-    reducerVersion: '0',
-    store: null as Store | null
+    reducerVersion: '0'
   },
   transloadit: {
     key: '',

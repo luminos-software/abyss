@@ -1,5 +1,4 @@
 import { AxiosPromise } from 'axios';
-import { Store } from 'redux';
 import { ActionCreator } from 'typescript-fsa';
 export declare const AbyssConfig: {
     api: {
@@ -11,7 +10,6 @@ export declare const AbyssConfig: {
     };
     redux: {
         reducerVersion: string;
-        store: Store<any, import("../../../../../Users/radu/work/abyss/node_modules/redux").AnyAction> | null;
     };
     transloadit: {
         key: string;

@@ -14,7 +14,6 @@ import {
 } from 'redux';
 import { devToolsEnhancer } from 'redux-devtools-extension/developmentOnly';
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
-import { AbyssConfig } from '../config';
 import { transloaditMiddleware } from '../transloadit/middleware';
 import { apiMiddleware } from './apiMiddleware';
 import { loggerMiddleware } from './loggerMiddleware';
@@ -51,10 +50,12 @@ export function createReduxStore<State>(epics: any, reducers: any, config: IRedu
   const enhancer: StoreEnhancer<State> = compose(...enhancers);
   const reducer: Reducer<State> = combineReducers(reducers);
 
-  const store: Store<State> = createStore(reducer, enhancer);
-  AbyssConfig.redux.store = store;
+  const newStore: Store<State> = createStore(reducer, enhancer);
+  store = newStore;
 
   epicMiddleware.run(combineEpics(...R.values(R.mergeAll([offlineEpics, epics]))));
 
-  return store;
+  return newStore;
 }
+
+export let store: Store | null = null;

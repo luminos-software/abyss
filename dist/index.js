@@ -9,6 +9,7 @@ export { createReduxStore } from './redux/createStore';
 export { getMetrics } from './theme/metrics';
 export { Transloadit } from './transloadit/service';
 export { DatastoreUtil } from './util/datastore';
+export { EmailUtil } from './util/email';
 if (__DEV__) {
     // for rn-debugger
     global.XMLHttpRequest = global.originalXMLHttpRequest || global.XMLHttpRequest;

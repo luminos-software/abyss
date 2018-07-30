@@ -6,4 +6,5 @@ interface IReduxConfig {
     logger?: boolean;
 }
 export declare function createReduxStore<State>(epics: any, reducers: any, config: IReduxConfig): Store<State, Action>;
+export declare let store: Store | null;
 export {};
