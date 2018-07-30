@@ -12,5 +12,6 @@ export { reducer as offlineReducer, State as OfflineState } from './redux/offlin
 export { getMetrics } from './theme/metrics';
 export { transloaditMiddleware } from './transloadit/middleware';
 export { Transloadit } from './transloadit/service';
+export { DatastoreUtil } from './util/datastore';
 export { Arguments, InferFromAxiosReturnType } from './util/types';
 export declare const offlineEpics: typeof epics;

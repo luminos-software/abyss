@@ -13,6 +13,7 @@ export { reducer as offlineReducer } from './redux/offlineReducer';
 export { getMetrics } from './theme/metrics';
 export { transloaditMiddleware } from './transloadit/middleware';
 export { Transloadit } from './transloadit/service';
+export { DatastoreUtil } from './util/datastore';
 export const offlineEpics = epics;
 if (__DEV__) {
     // for rn-debugger
