@@ -1,9 +1,11 @@
-import { Api } from '../api/api';
-import { datastore } from '../api/jsonapiStore';
-import { AbyssConfig } from '../config';
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const api_1 = require("../api/api");
+const jsonapiStore_1 = require("../api/jsonapiStore");
+const config_1 = require("../config");
 // tslint:disable-next-line:no-any
 const isApiAction = (action) => action.type === 'API_CALL';
-export const apiMiddleware = () => next => action => {
+exports.apiMiddleware = () => next => action => {
     if (!isApiAction(action)) {
         next(action);
         return action;
@@ -13,16 +15,16 @@ export const apiMiddleware = () => next => action => {
         .then(payload => {
         // insanely ugly hack, but I have no idea at this time how to ensure that another api call
         // does not get started between LOG_IN_DONE and the action that would set the token
-        if (AbyssConfig.api.authCalls.includes(action.actions.success.type)) {
-            Api.setAuthToken(payload.data.data.attributes.auth_token);
+        if (config_1.AbyssConfig.api.authCalls.includes(action.actions.success.type)) {
+            api_1.Api.setAuthToken(payload.data.data.attributes.auth_token);
         }
         next({
-            payload: { result: getSuccessResult(payload.data), params: action.params, offline: false },
+            payload: { result: exports.getSuccessResult(payload.data), params: action.params, offline: false },
             type: action.actions.success.type
         });
     })
         .catch((error) => {
-        const errorPayload = buildErrorPayload(error);
+        const errorPayload = exports.buildErrorPayload(error);
         if (!errorPayload.httpCode || errorPayload.httpCode >= 500) {
             // ErrorNotification.show(errorPayload);
         }
@@ -34,17 +36,17 @@ export const apiMiddleware = () => next => action => {
     return action;
 };
 // tslint:disable-next-line:no-any
-export const getSuccessResult = (data) => {
+exports.getSuccessResult = (data) => {
     if (data.data) {
         // jsonapi
-        const result = datastore.syncWithMeta(data);
+        const result = jsonapiStore_1.datastore.syncWithMeta(data);
         return result.data;
     }
     else {
         return data;
     }
 };
-export const buildErrorPayload = (error) => {
+exports.buildErrorPayload = (error) => {
     const payload = error.response || {
         statusText: error.message,
         status: null,

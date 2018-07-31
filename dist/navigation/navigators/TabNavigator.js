@@ -1,4 +1,6 @@
-import { createBottomTabNavigator } from 'react-navigation';
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const react_navigation_1 = require("react-navigation");
 const defaults = {
     swipeEnabled: false,
     animationEnabled: false,
@@ -8,5 +10,5 @@ const defaults = {
     },
     backBehavior: 'none'
 };
-export const createTabNavigator = (screens, options = {}) => createBottomTabNavigator(screens, Object.assign({}, defaults, options));
+exports.createTabNavigator = (screens, options = {}) => react_navigation_1.createBottomTabNavigator(screens, Object.assign({}, defaults, options));
 //# sourceMappingURL=TabNavigator.js.map

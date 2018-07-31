@@ -1,11 +1,13 @@
-import { Dimensions, NativeModules, PixelRatio, Platform } from 'react-native';
-const { width, height } = Dimensions.get('window');
-const HEADER_HEIGHT = Platform.select({ ios: 44, android: 74 });
-const STATUSBAR_DEFAULT_HEIGHT = Platform.select({ ios: 20, android: 0 });
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const react_native_1 = require("react-native");
+const { width, height } = react_native_1.Dimensions.get('window');
+const HEADER_HEIGHT = react_native_1.Platform.select({ ios: 44, android: 74 });
+const STATUSBAR_DEFAULT_HEIGHT = react_native_1.Platform.select({ ios: 20, android: 0 });
 // iphone x has a different statusbar height
-if (Platform.OS === 'ios') {
+if (react_native_1.Platform.OS === 'ios') {
     // this might be private
-    NativeModules.StatusBarManager.getHeight((data) => {
+    react_native_1.NativeModules.StatusBarManager.getHeight((data) => {
         if (data.height === STATUSBAR_DEFAULT_HEIGHT) {
             return;
         }
@@ -17,7 +19,7 @@ if (Platform.OS === 'ios') {
     });
 }
 const metrics = {
-    device: { height, width, pixelRatio: PixelRatio.get(), fontScale: PixelRatio.getFontScale() },
+    device: { height, width, pixelRatio: react_native_1.PixelRatio.get(), fontScale: react_native_1.PixelRatio.getFontScale() },
     header: {
         padding: STATUSBAR_DEFAULT_HEIGHT,
         height: HEADER_HEIGHT,
@@ -26,5 +28,5 @@ const metrics = {
     statusBar: { height: STATUSBAR_DEFAULT_HEIGHT },
     screen: { height: height - HEADER_HEIGHT - STATUSBAR_DEFAULT_HEIGHT, width }
 };
-export const getMetrics = () => metrics;
+exports.getMetrics = () => metrics;
 //# sourceMappingURL=metrics.js.map

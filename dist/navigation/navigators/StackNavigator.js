@@ -1,3 +1,4 @@
+"use strict";
 var __rest = (this && this.__rest) || function (s, e) {
     var t = {};
     for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
@@ -7,32 +8,36 @@ var __rest = (this && this.__rest) || function (s, e) {
             t[p[i]] = s[p[i]];
     return t;
 };
-import R from 'ramda';
-import React from 'react';
-import { Platform } from 'react-native';
-import { createStackNavigator as RNcreateStackNavigator, SafeAreaView } from 'react-navigation';
-import { AndroidBackHandler } from 'react-navigation-backhandler';
-import { getMetrics } from '../../theme/metrics';
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const ramda_1 = __importDefault(require("ramda"));
+const react_1 = __importDefault(require("react"));
+const react_native_1 = require("react-native");
+const react_navigation_1 = require("react-navigation");
+const react_navigation_backhandler_1 = require("react-navigation-backhandler");
+const metrics_1 = require("../../theme/metrics");
 const NAV_OPTIONS_DEFAULTS = {
     gesturesEnabled: false
 };
 let SCREEN_DEFAULTS = {
     headerStyle: {
-        height: getMetrics().header.height,
+        height: metrics_1.getMetrics().header.height,
         paddingTop: 20
     },
     headerTitleStyle: {
-        paddingHorizontal: Platform.select({ ios: 17, android: 0 }),
+        paddingHorizontal: react_native_1.Platform.select({ ios: 17, android: 0 }),
         color: 'white',
         width: '100%'
     },
     headerTintColor: 'white',
-    headerBackTitle: Platform.select({ ios: 'Back', android: '' })
+    headerBackTitle: react_native_1.Platform.select({ ios: 'Back', android: '' })
 };
-export const createStackNavigator = (screens, options = {}) => RNcreateStackNavigator(screens, Object.assign({ navigationOptions: NAV_OPTIONS_DEFAULTS }, options));
-export const StackScreen = {
+exports.createStackNavigator = (screens, options = {}) => react_navigation_1.createStackNavigator(screens, Object.assign({ navigationOptions: NAV_OPTIONS_DEFAULTS }, options));
+exports.StackScreen = {
     setDefaults(defaults) {
-        SCREEN_DEFAULTS = R.mergeDeepRight(SCREEN_DEFAULTS, defaults);
+        SCREEN_DEFAULTS = ramda_1.default.mergeDeepRight(SCREEN_DEFAULTS, defaults);
     },
     withoutHeader(Component, options = {}) {
         const { disableBackButton, safeAreaColor, safeAreaHideTop, safeAreaHideBottom } = options, navigationOptions = __rest(options, ["disableBackButton", "safeAreaColor", "safeAreaHideTop", "safeAreaHideBottom"]);
@@ -43,19 +48,19 @@ export const StackScreen = {
         return createStackScreen(Component, Object.assign({}, SCREEN_DEFAULTS, navigationOptions), { disableBackButton, safeAreaColor, safeAreaHideTop: true, safeAreaHideBottom });
     }
 };
-const createStackScreen = (Component, options = {}, customOptions = {}) => { var _a; return _a = class extends React.Component {
+const createStackScreen = (Component, options = {}, customOptions = {}) => { var _a; return _a = class extends react_1.default.Component {
         render() {
-            const screen = (React.createElement(SafeAreaView, { style: {
+            const screen = (react_1.default.createElement(react_navigation_1.SafeAreaView, { style: {
                     flex: 1,
                     backgroundColor: customOptions.safeAreaColor || 'white',
-                    paddingTop: Platform.select({ ios: 0, android: 20 })
+                    paddingTop: react_native_1.Platform.select({ ios: 0, android: 20 })
                 }, forceInset: {
                     top: customOptions.safeAreaHideTop ? 'never' : 'always',
                     bottom: customOptions.safeAreaHideBottom ? 'never' : 'always'
                 } },
-                React.createElement(Component, null)));
+                react_1.default.createElement(Component, null)));
             if (customOptions.disableBackButton) {
-                return React.createElement(AndroidBackHandler, { onBackPress: () => true }, screen);
+                return react_1.default.createElement(react_navigation_backhandler_1.AndroidBackHandler, { onBackPress: () => true }, screen);
             }
             return screen;
         }

@@ -1,21 +1,26 @@
-import axios from 'axios';
-import { AbyssConfig } from '../config';
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const axios_1 = __importDefault(require("axios"));
+const config_1 = require("../config");
 let api = null;
 const getApi = () => {
     if (!api) {
         // we defer creation under the assumption that the config will be set before the first request
-        api = axios.create({
-            baseURL: `${AbyssConfig.api.serverUrl}${AbyssConfig.api.prefix}`,
+        api = axios_1.default.create({
+            baseURL: `${config_1.AbyssConfig.api.serverUrl}${config_1.AbyssConfig.api.prefix}`,
             headers: {
                 'Content-Type': 'application/json'
             },
-            timeout: AbyssConfig.api.timeout
+            timeout: config_1.AbyssConfig.api.timeout
         });
     }
     return api;
 };
 let authToken = '';
-export const Api = {
+exports.Api = {
     setAuthToken(value) {
         getApi().defaults.headers.common.Authorization = `Token ${value}`;
         authToken = value;
@@ -24,7 +29,7 @@ export const Api = {
         return authToken;
     }
 };
-export class Repository {
+class Repository {
     get(path) {
         return getApi().get(path);
     }
@@ -41,7 +46,8 @@ export class Repository {
         return getApi().delete(path);
     }
 }
-export const ApiActions = {
+exports.Repository = Repository;
+exports.ApiActions = {
     directCall(promise, asyncAction, params) {
         return {
             type: 'API_CALL',

@@ -1,4 +1,6 @@
-import { DrawerActions, NavigationActions, StackActions } from 'react-navigation';
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const react_navigation_1 = require("react-navigation");
 let navigator = null;
 const getNavigationScreen = (navState) => {
     const route = navState.routes[navState.index];
@@ -16,7 +18,7 @@ const dispatch = (action) => {
     // tslint:disable-next-line:no-any
     return (navigator && navigator.dispatch(action)) || false;
 };
-export const Navigation = {
+exports.Navigation = {
     setNavigator(navigationContainer) {
         navigator = navigationContainer;
     },
@@ -33,22 +35,22 @@ export const Navigation = {
         return dispatch(action);
     },
     navigate(routeName, options) {
-        return dispatch(NavigationActions.navigate(Object.assign({ routeName }, options)));
+        return dispatch(react_navigation_1.NavigationActions.navigate(Object.assign({ routeName }, options)));
     },
     back() {
-        return dispatch(NavigationActions.back({ key: null }));
+        return dispatch(react_navigation_1.NavigationActions.back({ key: null }));
     },
     reset(options) {
-        return dispatch(StackActions.reset(options));
+        return dispatch(react_navigation_1.StackActions.reset(options));
     },
     toggleDrawer() {
-        return dispatch(DrawerActions.toggleDrawer());
+        return dispatch(react_navigation_1.DrawerActions.toggleDrawer());
     },
     openDrawer() {
-        return dispatch(DrawerActions.openDrawer());
+        return dispatch(react_navigation_1.DrawerActions.openDrawer());
     },
     closeDrawer() {
-        return dispatch(DrawerActions.closeDrawer());
+        return dispatch(react_navigation_1.DrawerActions.closeDrawer());
     }
 };
 //# sourceMappingURL=service.js.map

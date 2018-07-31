@@ -1,5 +1,7 @@
-import { createLogger } from 'redux-logger';
-export const loggerMiddleware = createLogger({
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const redux_logger_1 = require("redux-logger");
+exports.loggerMiddleware = redux_logger_1.createLogger({
     collapsed: true,
     predicate: () => __DEV__
 });

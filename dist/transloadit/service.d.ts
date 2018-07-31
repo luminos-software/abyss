@@ -22,7 +22,7 @@ export declare const Transloadit: {
         fileUri: string;
         template: string;
         extraParams: Record<string, string>;
-    }): Promise<import("../../../../../../Users/radu/work/abyss/node_modules/typescript-fsa").Action<{
+    }): Promise<import("typescript-fsa").Action<{
         file: string;
         written: number;
         total: number;
