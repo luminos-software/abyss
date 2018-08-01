@@ -3,6 +3,8 @@ import React from 'react';
 import { Platform } from 'react-native';
 import {
   createStackNavigator as RNcreateStackNavigator,
+  HeaderBackButton,
+  HeaderBackButtonProps,
   NavigationComponent,
   NavigationRouteConfigMap,
   NavigationScreenConfig,
@@ -12,6 +14,7 @@ import {
 } from 'react-navigation';
 import { AndroidBackHandler } from 'react-navigation-backhandler';
 import { getMetrics } from '../../theme/metrics';
+import { Navigation } from '../service';
 
 const NAV_OPTIONS_DEFAULTS: NavigationScreenConfig<NavigationStackScreenOptions> = {
   gesturesEnabled: false
@@ -76,7 +79,19 @@ export const StackScreen = {
       },
       { disableBackButton, safeAreaColor, safeAreaHideTop: true, safeAreaHideBottom }
     );
-  }
+  },
+
+  BackButton: (props: HeaderBackButtonProps) => (
+    <HeaderBackButton
+      title={SCREEN_WITH_HEADER_DEFAULTS.headerBackTitle!}
+      tintColor={SCREEN_WITH_HEADER_DEFAULTS.headerTintColor}
+      titleStyle={SCREEN_WITH_HEADER_DEFAULTS.headerBackTitleStyle}
+      truncatedTitle={SCREEN_WITH_HEADER_DEFAULTS.headerTruncatedBackTitle}
+      pressColorAndroid={SCREEN_WITH_HEADER_DEFAULTS.headerPressColorAndroid}
+      onPress={Navigation.back}
+      {...props}
+    />
+  )
 };
 
 const createStackScreen = (

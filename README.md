@@ -128,7 +128,8 @@ import { StackScreen } from 'abyss';
 
 // also StackScreen.withoutHeader
 export const MedicinesScreen = StackScreen.withDefaultHeader(MedicinesConnected, {
-  headerTitle: 'Medicines'
+  headerTitle: 'Medicines',
+  headerLeft: <StackScreen.BackButton onPress={() => store.dispatch(...)} />
 });
 ```
 
