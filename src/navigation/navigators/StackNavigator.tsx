@@ -17,7 +17,7 @@ const NAV_OPTIONS_DEFAULTS: NavigationScreenConfig<NavigationStackScreenOptions>
   gesturesEnabled: false
 };
 
-let SCREEN_DEFAULTS: NavigationStackScreenOptions = {
+let SCREEN_WITH_HEADER_DEFAULTS: NavigationStackScreenOptions = {
   headerStyle: {
     height: getMetrics().header.height,
     paddingTop: 20
@@ -28,6 +28,11 @@ let SCREEN_DEFAULTS: NavigationStackScreenOptions = {
     width: '100%'
   },
   headerTintColor: 'white',
+  headerBackTitle: Platform.select({ ios: 'Back', android: '' })
+};
+
+const SCREEN_WITHOUT_HEADER_DEFAULTS: NavigationStackScreenOptions = {
+  header: null,
   headerBackTitle: Platform.select({ ios: 'Back', android: '' })
 };
 
@@ -46,14 +51,14 @@ interface ICustomNavigationParams {
 
 export const StackScreen = {
   setDefaults(defaults: NavigationStackScreenOptions) {
-    SCREEN_DEFAULTS = R.mergeDeepRight(SCREEN_DEFAULTS, defaults);
+    SCREEN_WITH_HEADER_DEFAULTS = R.mergeDeepRight(SCREEN_WITH_HEADER_DEFAULTS, defaults);
   },
 
   withoutHeader(Component: React.ComponentType, options: NavigationStackScreenOptions & ICustomNavigationParams = {}) {
     const { disableBackButton, safeAreaColor, safeAreaHideTop, safeAreaHideBottom, ...navigationOptions } = options;
     return createStackScreen(
       Component,
-      { ...navigationOptions, header: null },
+      { ...SCREEN_WITHOUT_HEADER_DEFAULTS, ...navigationOptions },
       { disableBackButton, safeAreaColor, safeAreaHideTop, safeAreaHideBottom }
     );
   },
@@ -66,7 +71,7 @@ export const StackScreen = {
     return createStackScreen(
       Component,
       {
-        ...SCREEN_DEFAULTS,
+        ...SCREEN_WITH_HEADER_DEFAULTS,
         ...navigationOptions
       },
       { disableBackButton, safeAreaColor, safeAreaHideTop: true, safeAreaHideBottom }

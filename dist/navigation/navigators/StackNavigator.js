@@ -21,7 +21,7 @@ const metrics_1 = require("../../theme/metrics");
 const NAV_OPTIONS_DEFAULTS = {
     gesturesEnabled: false
 };
-let SCREEN_DEFAULTS = {
+let SCREEN_WITH_HEADER_DEFAULTS = {
     headerStyle: {
         height: metrics_1.getMetrics().header.height,
         paddingTop: 20
@@ -34,18 +34,22 @@ let SCREEN_DEFAULTS = {
     headerTintColor: 'white',
     headerBackTitle: react_native_1.Platform.select({ ios: 'Back', android: '' })
 };
+const SCREEN_WITHOUT_HEADER_DEFAULTS = {
+    header: null,
+    headerBackTitle: react_native_1.Platform.select({ ios: 'Back', android: '' })
+};
 exports.createStackNavigator = (screens, options = {}) => react_navigation_1.createStackNavigator(screens, Object.assign({ navigationOptions: NAV_OPTIONS_DEFAULTS }, options));
 exports.StackScreen = {
     setDefaults(defaults) {
-        SCREEN_DEFAULTS = ramda_1.default.mergeDeepRight(SCREEN_DEFAULTS, defaults);
+        SCREEN_WITH_HEADER_DEFAULTS = ramda_1.default.mergeDeepRight(SCREEN_WITH_HEADER_DEFAULTS, defaults);
     },
     withoutHeader(Component, options = {}) {
         const { disableBackButton, safeAreaColor, safeAreaHideTop, safeAreaHideBottom } = options, navigationOptions = __rest(options, ["disableBackButton", "safeAreaColor", "safeAreaHideTop", "safeAreaHideBottom"]);
-        return createStackScreen(Component, Object.assign({}, navigationOptions, { header: null }), { disableBackButton, safeAreaColor, safeAreaHideTop, safeAreaHideBottom });
+        return createStackScreen(Component, Object.assign({}, SCREEN_WITHOUT_HEADER_DEFAULTS, navigationOptions), { disableBackButton, safeAreaColor, safeAreaHideTop, safeAreaHideBottom });
     },
     withDefaultHeader(Component, options = {}) {
         const { disableBackButton, safeAreaColor, safeAreaHideTop, safeAreaHideBottom } = options, navigationOptions = __rest(options, ["disableBackButton", "safeAreaColor", "safeAreaHideTop", "safeAreaHideBottom"]);
-        return createStackScreen(Component, Object.assign({}, SCREEN_DEFAULTS, navigationOptions), { disableBackButton, safeAreaColor, safeAreaHideTop: true, safeAreaHideBottom });
+        return createStackScreen(Component, Object.assign({}, SCREEN_WITH_HEADER_DEFAULTS, navigationOptions), { disableBackButton, safeAreaColor, safeAreaHideTop: true, safeAreaHideBottom });
     }
 };
 const createStackScreen = (Component, options = {}, customOptions = {}) => { var _a; return _a = class extends react_1.default.Component {
