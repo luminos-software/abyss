@@ -132,6 +132,10 @@ import { StackScreen } from 'abyss';
 // also StackScreen.withoutHeader
 export const MedicinesScreen = StackScreen.withDefaultHeader(MedicinesConnected, {
   headerTitle: 'Medicines',
+  // or connected to redux
+  // headerTitle: StackScreen.connectTitle<IRootState>(state => ({
+  //   title: state.data.user.name
+  // })),
   headerLeft: <StackScreen.BackButton onPress={() => store.dispatch(...)} />
 });
 ```

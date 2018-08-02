@@ -1,18 +1,21 @@
 import R from 'ramda';
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, TextProps } from 'react-native';
 import {
   createStackNavigator as RNcreateStackNavigator,
   HeaderBackButton,
   HeaderBackButtonProps,
+  HeaderTitle,
   NavigationComponent,
   NavigationRouteConfigMap,
   NavigationScreenConfig,
   NavigationStackScreenOptions,
+  OverriddenNavigationStackScreenOptions,
   SafeAreaView,
   StackNavigatorConfig
 } from 'react-navigation';
 import { AndroidBackHandler } from 'react-navigation-backhandler';
+import { connect } from 'react-redux';
 import { getMetrics } from '../../theme/metrics';
 import { Navigation } from '../service';
 
@@ -34,10 +37,15 @@ let SCREEN_WITH_HEADER_DEFAULTS: NavigationStackScreenOptions = {
   headerBackTitle: Platform.select({ ios: 'Back', android: '' })
 };
 
-const SCREEN_WITHOUT_HEADER_DEFAULTS: NavigationStackScreenOptions = {
+const SCREEN_WITHOUT_HEADER_DEFAULTS: OverriddenNavigationStackScreenOptions = {
   header: null,
   headerBackTitle: Platform.select({ ios: 'Back', android: '' })
 };
+
+type HeaderTitleProps = TextProps & { title: string };
+const HeaderTitleView: React.SFC<HeaderTitleProps> = ({ title, ...props }) => (
+  <HeaderTitle {...props}>{title}</HeaderTitle>
+);
 
 export const createStackNavigator = (screens: NavigationRouteConfigMap, options: StackNavigatorConfig = {}) =>
   RNcreateStackNavigator(screens, {
@@ -53,11 +61,14 @@ interface ICustomNavigationParams {
 }
 
 export const StackScreen = {
-  setDefaults(defaults: NavigationStackScreenOptions) {
+  setDefaults(defaults: OverriddenNavigationStackScreenOptions) {
     SCREEN_WITH_HEADER_DEFAULTS = R.mergeDeepRight(SCREEN_WITH_HEADER_DEFAULTS, defaults);
   },
 
-  withoutHeader(Component: React.ComponentType, options: NavigationStackScreenOptions & ICustomNavigationParams = {}) {
+  withoutHeader(
+    Component: React.ComponentType,
+    options: OverriddenNavigationStackScreenOptions & ICustomNavigationParams = {}
+  ) {
     const { disableBackButton, safeAreaColor, safeAreaHideTop, safeAreaHideBottom, ...navigationOptions } = options;
     return createStackScreen(
       Component,
@@ -68,7 +79,7 @@ export const StackScreen = {
 
   withDefaultHeader(
     Component: React.ComponentType,
-    options: NavigationStackScreenOptions & ICustomNavigationParams = {}
+    options: OverriddenNavigationStackScreenOptions & ICustomNavigationParams = {}
   ) {
     const { disableBackButton, safeAreaColor, safeAreaHideTop, safeAreaHideBottom, ...navigationOptions } = options;
     return createStackScreen(
@@ -91,16 +102,20 @@ export const StackScreen = {
       onPress={Navigation.back}
       {...props}
     />
-  )
+  ),
+
+  connectTitle<State extends {}>(mapStateToProps: (state: State) => Partial<HeaderTitleProps>) {
+    return connect(mapStateToProps)(HeaderTitleView);
+  }
 };
 
 const createStackScreen = (
   Component: React.ComponentType,
-  options: NavigationStackScreenOptions = {},
+  options: OverriddenNavigationStackScreenOptions = {},
   customOptions: ICustomNavigationParams = {}
 ): NavigationComponent =>
   class extends React.Component<{}, {}> {
-    static navigationOptions: NavigationStackScreenOptions = { ...options };
+    static navigationOptions: OverriddenNavigationStackScreenOptions = { ...options };
 
     render() {
       const screen = (

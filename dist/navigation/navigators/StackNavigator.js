@@ -17,6 +17,7 @@ const react_1 = __importDefault(require("react"));
 const react_native_1 = require("react-native");
 const react_navigation_1 = require("react-navigation");
 const react_navigation_backhandler_1 = require("react-navigation-backhandler");
+const react_redux_1 = require("react-redux");
 const metrics_1 = require("../../theme/metrics");
 const service_1 = require("../service");
 const NAV_OPTIONS_DEFAULTS = {
@@ -39,6 +40,10 @@ const SCREEN_WITHOUT_HEADER_DEFAULTS = {
     header: null,
     headerBackTitle: react_native_1.Platform.select({ ios: 'Back', android: '' })
 };
+const HeaderTitleView = (_a) => {
+    var { title } = _a, props = __rest(_a, ["title"]);
+    return (react_1.default.createElement(react_navigation_1.HeaderTitle, Object.assign({}, props), title));
+};
 exports.createStackNavigator = (screens, options = {}) => react_navigation_1.createStackNavigator(screens, Object.assign({ navigationOptions: NAV_OPTIONS_DEFAULTS }, options));
 exports.StackScreen = {
     setDefaults(defaults) {
@@ -52,7 +57,10 @@ exports.StackScreen = {
         const { disableBackButton, safeAreaColor, safeAreaHideTop, safeAreaHideBottom } = options, navigationOptions = __rest(options, ["disableBackButton", "safeAreaColor", "safeAreaHideTop", "safeAreaHideBottom"]);
         return createStackScreen(Component, Object.assign({}, SCREEN_WITH_HEADER_DEFAULTS, navigationOptions), { disableBackButton, safeAreaColor, safeAreaHideTop: true, safeAreaHideBottom });
     },
-    BackButton: (props) => (react_1.default.createElement(react_navigation_1.HeaderBackButton, Object.assign({ title: SCREEN_WITH_HEADER_DEFAULTS.headerBackTitle, tintColor: SCREEN_WITH_HEADER_DEFAULTS.headerTintColor, titleStyle: SCREEN_WITH_HEADER_DEFAULTS.headerBackTitleStyle, truncatedTitle: SCREEN_WITH_HEADER_DEFAULTS.headerTruncatedBackTitle, pressColorAndroid: SCREEN_WITH_HEADER_DEFAULTS.headerPressColorAndroid, onPress: service_1.Navigation.back }, props)))
+    BackButton: (props) => (react_1.default.createElement(react_navigation_1.HeaderBackButton, Object.assign({ title: SCREEN_WITH_HEADER_DEFAULTS.headerBackTitle, tintColor: SCREEN_WITH_HEADER_DEFAULTS.headerTintColor, titleStyle: SCREEN_WITH_HEADER_DEFAULTS.headerBackTitleStyle, truncatedTitle: SCREEN_WITH_HEADER_DEFAULTS.headerTruncatedBackTitle, pressColorAndroid: SCREEN_WITH_HEADER_DEFAULTS.headerPressColorAndroid, onPress: service_1.Navigation.back }, props))),
+    connectTitle(mapStateToProps) {
+        return react_redux_1.connect(mapStateToProps)(HeaderTitleView);
+    }
 };
 const createStackScreen = (Component, options = {}, customOptions = {}) => { var _a; return _a = class extends react_1.default.Component {
         render() {
