@@ -8,30 +8,32 @@ For now the library is supposed to be an endless pit of infrastructure code that
 
 ### Direct API interaction
 
-First define a repository (`repositories/dayRepository.ts`):
+First define a repository:
 
 ```typescript
+// repositories/dayRepository.ts
 import { Repository } from 'abyss';
 import { IDayModel } from 'models';
 
 const repository = new Repository<IDayModel>();
 
 export const dayRepository = {
-  persistDay({ day }: { day: IDayModel }) {
+  getDay(id: string) {
+    return repository.get(`/days/${id}`);
+  },
+
+  persistDay(day: IDayModel) {
     return repository.post<{ date: string }>('/days', {
-      data: {
-        attributes: {
-          date: day.date
-        }
-      }
+      data: { attributes: { date: day.date } }
     });
   }
 };
 ```
 
-Then add an async action that will be used to track the API call progress and get the response (`redux/datastoreReducer.ts`):
+Then add an async action that will be used to track the API call progress and get the response:
 
 ```typescript
+// redux/datastoreReducer.ts
 import { IApiError } from 'abyss';
 import { IDayModel } from 'models';
 import actionCreatorFactory from 'typescript-fsa';
@@ -57,9 +59,10 @@ export const reducer = reducerWithInitialState(initialState)
   .build();
 ```
 
-Then dispatch an API call action (`epics/homeEpics.ts`):
+Then dispatch an API call action:
 
 ```typescript
+// epics/homeEpics.ts
 import { ApiActions } from 'config/abyss';
 
 export const persistDay: Epic<Action, Action, IRootState> = action$ =>
@@ -73,7 +76,7 @@ export const persistDay: Epic<Action, Action, IRootState> = action$ =>
 
 ### Offline support
 
-Mark the repository action as offline-capable in `config/abyss.ts`:
+Mark the repository method as offline-capable in `config/abyss.ts`:
 
 ```typescript
 const offlineCalls = {
@@ -82,7 +85,7 @@ const offlineCalls = {
 AbyssConfig.api.offlineCalls = offlineCalls;
 ```
 
-And instead of dispatching `ApiActions.directCall`, `ApiActions.offlineCall` should be used:
+And instead of dispatching `ApiActions.directCall`, use `ApiActions.offlineCall`:
 
 ```typescript
 ApiActions.offlineCall('dayRepository.persistDay', DatastoreActions.refreshDay, {
@@ -135,7 +138,7 @@ export const MedicinesScreen = StackScreen.withDefaultHeader(MedicinesConnected,
 
 ### Transloadit
 
-Simply dispatch an action:
+Assuming Transloadit is enabled in the store sonfig, simply dispatch an action:
 
 ```typescript
   Transloadit.action(
