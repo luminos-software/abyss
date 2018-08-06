@@ -42,7 +42,8 @@ export declare const Api: {
 };
 export declare class Repository<T> {
     get(path: string): AxiosPromise<T>;
-    post<R>(path: string, body: IJsonapiRequest<R>): AxiosPromise<T>;
+    post<R>(path: string, body: IJsonapiRequest<R> | R): AxiosPromise<T>;
+    postFreeForm<R>(path: string, body: R): AxiosPromise<T>;
     put(path: string, body: IJsonapiRequest<T>): AxiosPromise<T>;
     patch(path: string, body: IJsonapiRequest<Partial<T>>): AxiosPromise<T>;
     delete(path: string): AxiosPromise<any>;

@@ -36,6 +36,9 @@ class Repository {
     post(path, body) {
         return getApi().post(path, body);
     }
+    postFreeForm(path, body) {
+        return getApi().post(path, body);
+    }
     put(path, body) {
         return getApi().put(path, body);
     }

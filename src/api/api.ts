@@ -66,6 +66,10 @@ export class Repository<T> {
     return getApi().post<T>(path, body);
   }
 
+  postFreeForm<R>(path: string, body: R) {
+    return getApi().post<T>(path, body);
+  }
+
   put(path: string, body: IJsonapiRequest<T>) {
     return getApi().put<T>(path, body);
   }
