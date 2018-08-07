@@ -1,0 +1,13 @@
+{
+  "presets": ["react-native"],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": ["./artifacts"],
+        "extensions": [".js", ".ios.js", ".android.js"]
+      }
+    ],
+    "transform-remove-console"
+  ]
+}

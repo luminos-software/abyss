@@ -155,7 +155,7 @@ Assuming Transloadit is enabled in the store sonfig, simply dispatch an action:
 
 ## Configuration
 
-### Tsconfig and tslint
+### Config files
 
 ```json
 // tsconfig.json
@@ -172,6 +172,11 @@ Assuming Transloadit is enabled in the store sonfig, simply dispatch an action:
 // tslint.json
 {
   "extends": "./node_modules/abyss/config/tslint.json"
+}
+
+// .babelrc
+{
+  "extends": "./node_modules/abyss/config/.babelrc"
 }
 ```
 
