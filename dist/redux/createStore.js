@@ -24,7 +24,7 @@ const compact = ramda_1.default.reject(ramda_1.default.isNil);
 // tslint:disable-next-line:no-any
 function createReduxStore(epics, reducers, config) {
     const epicMiddleware = redux_observable_1.createEpicMiddleware();
-    const offlineEnhancer = config.offline ? redux_offline_1.offline(Object.assign({}, offline_1.offlineConfig, config.offline)) : null;
+    const offlineEnhancer = config.offline ? redux_offline_1.offline(ramda_1.default.mergeDeepRight(offline_1.offlineConfig, config.offline)) : null;
     const middlewares = compact([
         apiMiddleware_1.apiMiddleware,
         config.transloadit ? middleware_1.transloaditMiddleware : null,
