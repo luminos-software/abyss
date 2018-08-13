@@ -7,7 +7,11 @@
         "root": ["./artifacts"],
         "extensions": [".js", ".ios.js", ".android.js"]
       }
-    ],
-    "transform-remove-console"
-  ]
+    ]
+  ],
+  "env": {
+    "production": {
+      "plugins": ["transform-remove-console"]
+    }
+  }
 }
