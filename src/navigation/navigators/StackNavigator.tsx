@@ -1,6 +1,6 @@
 import R from 'ramda';
 import React from 'react';
-import { Platform, TextProps } from 'react-native';
+import { Platform, TextProps, ViewStyle } from 'react-native';
 import {
   createStackNavigator as RNcreateStackNavigator,
   HeaderBackButton,
@@ -73,7 +73,8 @@ export const StackScreen = {
     return createStackScreen(
       Component,
       { ...SCREEN_WITHOUT_HEADER_DEFAULTS, ...navigationOptions },
-      { disableBackButton, safeAreaColor, safeAreaHideTop, safeAreaHideBottom }
+      { disableBackButton, safeAreaColor, safeAreaHideTop, safeAreaHideBottom },
+      { paddingTop: safeAreaHideTop ? 0 : Platform.select({ ios: 0, android: 24 }) } // status bar
     );
   },
 
@@ -112,7 +113,8 @@ export const StackScreen = {
 const createStackScreen = (
   Component: React.ComponentType,
   options: OverriddenNavigationStackScreenOptions = {},
-  customOptions: ICustomNavigationParams = {}
+  customOptions: ICustomNavigationParams = {},
+  safeAreaStyle: ViewStyle = {}
 ): NavigationComponent =>
   class extends React.Component<{}, {}> {
     static navigationOptions: OverriddenNavigationStackScreenOptions = { ...options };
@@ -123,7 +125,7 @@ const createStackScreen = (
           style={{
             flex: 1,
             backgroundColor: customOptions.safeAreaColor || 'white',
-            paddingTop: Platform.select({ ios: 0, android: 20 })
+            ...safeAreaStyle
           }}
           forceInset={{
             top: customOptions.safeAreaHideTop ? 'never' : 'always',

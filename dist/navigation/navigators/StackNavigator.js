@@ -51,7 +51,8 @@ exports.StackScreen = {
     },
     withoutHeader(Component, options = {}) {
         const { disableBackButton, safeAreaColor, safeAreaHideTop, safeAreaHideBottom } = options, navigationOptions = __rest(options, ["disableBackButton", "safeAreaColor", "safeAreaHideTop", "safeAreaHideBottom"]);
-        return createStackScreen(Component, Object.assign({}, SCREEN_WITHOUT_HEADER_DEFAULTS, navigationOptions), { disableBackButton, safeAreaColor, safeAreaHideTop, safeAreaHideBottom });
+        return createStackScreen(Component, Object.assign({}, SCREEN_WITHOUT_HEADER_DEFAULTS, navigationOptions), { disableBackButton, safeAreaColor, safeAreaHideTop, safeAreaHideBottom }, { paddingTop: safeAreaHideTop ? 0 : react_native_1.Platform.select({ ios: 0, android: 24 }) } // status bar
+        );
     },
     withDefaultHeader(Component, options = {}) {
         const { disableBackButton, safeAreaColor, safeAreaHideTop, safeAreaHideBottom } = options, navigationOptions = __rest(options, ["disableBackButton", "safeAreaColor", "safeAreaHideTop", "safeAreaHideBottom"]);
@@ -62,13 +63,9 @@ exports.StackScreen = {
         return react_redux_1.connect(mapStateToProps)(HeaderTitleView);
     }
 };
-const createStackScreen = (Component, options = {}, customOptions = {}) => { var _a; return _a = class extends react_1.default.Component {
+const createStackScreen = (Component, options = {}, customOptions = {}, safeAreaStyle = {}) => { var _a; return _a = class extends react_1.default.Component {
         render() {
-            const screen = (react_1.default.createElement(react_navigation_1.SafeAreaView, { style: {
-                    flex: 1,
-                    backgroundColor: customOptions.safeAreaColor || 'white',
-                    paddingTop: react_native_1.Platform.select({ ios: 0, android: 20 })
-                }, forceInset: {
+            const screen = (react_1.default.createElement(react_navigation_1.SafeAreaView, { style: Object.assign({ flex: 1, backgroundColor: customOptions.safeAreaColor || 'white' }, safeAreaStyle), forceInset: {
                     top: customOptions.safeAreaHideTop ? 'never' : 'always',
                     bottom: customOptions.safeAreaHideBottom ? 'never' : 'always'
                 } },
