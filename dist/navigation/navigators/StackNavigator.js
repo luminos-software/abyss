@@ -34,11 +34,11 @@ let SCREEN_WITH_HEADER_DEFAULTS = {
         width: '100%'
     },
     headerTintColor: 'white',
-    headerBackTitle: react_native_1.Platform.select({ ios: 'Back', android: '' })
+    headerBackTitle: ' '
 };
 const SCREEN_WITHOUT_HEADER_DEFAULTS = {
     header: null,
-    headerBackTitle: react_native_1.Platform.select({ ios: 'Back', android: '' })
+    headerBackTitle: ' '
 };
 const HeaderTitleView = (_a) => {
     var { title } = _a, props = __rest(_a, ["title"]);
@@ -65,6 +65,7 @@ exports.StackScreen = {
 };
 const createStackScreen = (Component, options = {}, customOptions = {}, safeAreaStyle = {}) => { var _a; return _a = class extends react_1.default.Component {
         render() {
+            console.log(options);
             const screen = (react_1.default.createElement(react_navigation_1.SafeAreaView, { style: Object.assign({ flex: 1, backgroundColor: customOptions.safeAreaColor || 'white' }, safeAreaStyle), forceInset: {
                     top: customOptions.safeAreaHideTop ? 'never' : 'always',
                     bottom: customOptions.safeAreaHideBottom ? 'never' : 'always'

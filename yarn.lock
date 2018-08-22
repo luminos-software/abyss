@@ -23,15 +23,15 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-native@0.56.6":
-  version "0.56.6"
-  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.56.6.tgz#d9c60e1df95ec0402fa956225558c8a48f37f23f"
+"@types/react-native@0.56.10":
+  version "0.56.10"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.56.10.tgz#b4db3244fcbe48f0398aa714869db15b5984779e"
   dependencies:
     "@types/react" "*"
 
-"@types/react-navigation@2.0.13":
-  version "2.0.13"
-  resolved "https://registry.yarnpkg.com/@types/react-navigation/-/react-navigation-2.0.13.tgz#46d7a4ab7cfec96ef455342fc7977fc82b051361"
+"@types/react-navigation@2.0.16":
+  version "2.0.16"
+  resolved "https://registry.yarnpkg.com/@types/react-navigation/-/react-navigation-2.0.16.tgz#cf9b45e3633f5fe4ad645b9aabded6bfd03fc6d1"
   dependencies:
     "@types/react" "*"
     "@types/react-native" "*"
@@ -776,9 +776,9 @@ pkg-up@^2.0.0:
   dependencies:
     find-up "^2.1.0"
 
-prettier@1.14.0:
-  version "1.14.0"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.14.0.tgz#847c235522035fd988100f1f43cf20a7d24f9372"
+prettier@1.14.2:
+  version "1.14.2"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.14.2.tgz#0ac1c6e1a90baa22a62925f41963c841983282f9"
 
 private@^0.1.6:
   version "0.1.8"
@@ -923,21 +923,21 @@ tslib@1.9.0:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.0.tgz#e37a86fda8cbbaf23a057f473c9f4dc64e5fc2e8"
 
-tslib@^1.7.1, tslib@^1.8.0, tslib@^1.8.1, tslib@^1.9.0:
+tslib@^1.8.0, tslib@^1.8.1, tslib@^1.9.0:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
 
-tslint-config-prettier@1.14.0:
-  version "1.14.0"
-  resolved "https://registry.yarnpkg.com/tslint-config-prettier/-/tslint-config-prettier-1.14.0.tgz#860b36634e53f4c70c64c51ff3ef7fd9bbab7676"
+tslint-config-prettier@1.15.0:
+  version "1.15.0"
+  resolved "https://registry.yarnpkg.com/tslint-config-prettier/-/tslint-config-prettier-1.15.0.tgz#76b9714399004ab6831fdcf76d89b73691c812cf"
 
-tslint-eslint-rules@5.3.1:
-  version "5.3.1"
-  resolved "https://registry.yarnpkg.com/tslint-eslint-rules/-/tslint-eslint-rules-5.3.1.tgz#10dec4361df0b3e4385d91ff8e0226bda4ec2ad4"
+tslint-eslint-rules@5.4.0:
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/tslint-eslint-rules/-/tslint-eslint-rules-5.4.0.tgz#e488cc9181bf193fe5cd7bfca213a7695f1737b5"
   dependencies:
     doctrine "0.7.2"
     tslib "1.9.0"
-    tsutils "2.8.0"
+    tsutils "^3.0.0"
 
 tslint-react@3.6.0:
   version "3.6.0"
@@ -962,15 +962,15 @@ tslint@5.11.0:
     tslib "^1.8.0"
     tsutils "^2.27.2"
 
-tsutils@2.8.0:
-  version "2.8.0"
-  resolved "https://registry.yarnpkg.com/tsutils/-/tsutils-2.8.0.tgz#0160173729b3bf138628dd14a1537e00851d814a"
-  dependencies:
-    tslib "^1.7.1"
-
 tsutils@^2.13.1, tsutils@^2.27.2:
   version "2.28.0"
   resolved "https://registry.yarnpkg.com/tsutils/-/tsutils-2.28.0.tgz#6bd71e160828f9d019b6f4e844742228f85169a1"
+  dependencies:
+    tslib "^1.8.1"
+
+tsutils@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/tsutils/-/tsutils-3.0.0.tgz#0c5070a17a0503e056da038c48b5a1870a50a9ad"
   dependencies:
     tslib "^1.8.1"
 

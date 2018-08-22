@@ -38,7 +38,8 @@
       "services",
       "util",
       "config",
-      "modules"
+      "modules",
+      "models"
     ],
     "no-unused-expression": [true, "allow-fast-null-checks"],
     "no-var-keyword": true,

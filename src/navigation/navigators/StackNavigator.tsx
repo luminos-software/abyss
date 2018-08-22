@@ -34,12 +34,12 @@ let SCREEN_WITH_HEADER_DEFAULTS: NavigationStackScreenOptions = {
     width: '100%'
   },
   headerTintColor: 'white',
-  headerBackTitle: Platform.select({ ios: 'Back', android: '' })
+  headerBackTitle: ' '
 };
 
 const SCREEN_WITHOUT_HEADER_DEFAULTS: OverriddenNavigationStackScreenOptions = {
   header: null,
-  headerBackTitle: Platform.select({ ios: 'Back', android: '' })
+  headerBackTitle: ' '
 };
 
 type HeaderTitleProps = TextProps & { title: string };
@@ -120,6 +120,7 @@ const createStackScreen = (
     static navigationOptions: OverriddenNavigationStackScreenOptions = { ...options };
 
     render() {
+      console.log(options);
       const screen = (
         <SafeAreaView
           style={{
