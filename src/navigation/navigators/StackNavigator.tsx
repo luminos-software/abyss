@@ -120,7 +120,6 @@ const createStackScreen = (
     static navigationOptions: OverriddenNavigationStackScreenOptions = { ...options };
 
     render() {
-      console.log(options);
       const screen = (
         <SafeAreaView
           style={{
