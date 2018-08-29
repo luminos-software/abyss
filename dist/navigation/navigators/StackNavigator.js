@@ -65,7 +65,6 @@ exports.StackScreen = {
 };
 const createStackScreen = (Component, options = {}, customOptions = {}, safeAreaStyle = {}) => { var _a; return _a = class extends react_1.default.Component {
         render() {
-            console.log(options);
             const screen = (react_1.default.createElement(react_navigation_1.SafeAreaView, { style: Object.assign({ flex: 1, backgroundColor: customOptions.safeAreaColor || 'white' }, safeAreaStyle), forceInset: {
                     top: customOptions.safeAreaHideTop ? 'never' : 'always',
                     bottom: customOptions.safeAreaHideBottom ? 'never' : 'always'
