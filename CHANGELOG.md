@@ -1,3 +1,16 @@
+### 0.2.1
+
+Moved some common types. All projects should change `typings/index.d.ts` to `import 'abyss/typings';` and remove most custom types.
+
+### 0.2.0
+
+Add `DevToolsScreen` and `ThemeGate`. All projects should:
+
+- set `AbyssConfig.theme.colors`;
+- add `DevToolsScreen` to the navigator;
+- use `ThemeGate` in `RootContainer` to render the navigator lazily;
+- navigation defaults should be set on `ThemeGate.onLoadFinished`.
+
 ### 0.1.7
 
 Add `config/.babelrc`. All projects should extends this.
