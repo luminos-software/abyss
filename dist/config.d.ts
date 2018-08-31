@@ -1,11 +1,11 @@
 import { AxiosPromise } from 'axios';
 import { ActionCreator } from 'typescript-fsa';
-export declare const AbyssConfig: {
+interface IAbyssConfig {
     api: {
         serverUrl: string;
         prefix: string;
         timeout: number;
-        offlineCalls: Record<string, (...args: any[]) => AxiosPromise<any>>;
+        offlineCalls: Record<string, (...args: any[]) => AxiosPromise>;
         authCalls: string[];
     };
     redux: {
@@ -22,4 +22,9 @@ export declare const AbyssConfig: {
             total: number;
         }> | null;
     };
-};
+    theme: {
+        colors: Record<string, string>;
+    };
+}
+export declare const AbyssConfig: IAbyssConfig;
+export {};

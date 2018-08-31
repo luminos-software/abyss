@@ -1,15 +1,37 @@
 import { AxiosPromise } from 'axios';
 import { ActionCreator } from 'typescript-fsa';
 
-// tslint:disable:no-object-literal-type-assertion
-export const AbyssConfig = {
+interface IAbyssConfig {
+  api: {
+    serverUrl: string;
+    prefix: string;
+    timeout: number;
+    // tslint:disable-next-line:no-any
+    offlineCalls: Record<string, (...args: any[]) => AxiosPromise>;
+    authCalls: string[];
+  };
+  redux: {
+    reducerVersion: string;
+  };
+  transloadit: {
+    key: string;
+    secret: string;
+    notifiyUrl: string;
+    templates: Record<string, string>;
+    progressAction: ActionCreator<{ file: string; written: number; total: number }> | null;
+  };
+  theme: {
+    colors: Record<string, string>;
+  };
+}
+
+export const AbyssConfig: IAbyssConfig = {
   api: {
     serverUrl: '',
     prefix: '/api/v1',
     timeout: 4000,
-    // tslint:disable-next-line:no-any
-    offlineCalls: {} as Record<string, (...args: any[]) => AxiosPromise>,
-    authCalls: [] as string[]
+    offlineCalls: {},
+    authCalls: []
   },
   redux: {
     reducerVersion: '0'
@@ -18,7 +40,8 @@ export const AbyssConfig = {
     key: '',
     secret: '',
     notifiyUrl: 'https://localhost/transloadit/file_upload',
-    templates: {} as Record<string, string>,
-    progressAction: null as ActionCreator<{ file: string; written: number; total: number }> | null
-  }
+    templates: {},
+    progressAction: null
+  },
+  theme: { colors: {} }
 };

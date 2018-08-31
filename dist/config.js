@@ -1,12 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-// tslint:disable:no-object-literal-type-assertion
 exports.AbyssConfig = {
     api: {
         serverUrl: '',
         prefix: '/api/v1',
         timeout: 4000,
-        // tslint:disable-next-line:no-any
         offlineCalls: {},
         authCalls: []
     },
@@ -19,6 +17,7 @@ exports.AbyssConfig = {
         notifiyUrl: 'https://localhost/transloadit/file_upload',
         templates: {},
         progressAction: null
-    }
+    },
+    theme: { colors: {} }
 };
 //# sourceMappingURL=config.js.map
