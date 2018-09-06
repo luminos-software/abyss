@@ -198,6 +198,8 @@ AbyssConfig.api.authCalls = ['login/LOG_IN_DONE', 'login/CREATE_USER_ACCOUNT_DON
 
 // manually set the auth token
 Api.setAuthToken(getUniqueID());
+// and other headers
+Api.setHeader('Accept', 'application/json');
 ```
 
 ### Offline support

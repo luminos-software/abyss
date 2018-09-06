@@ -1,3 +1,7 @@
+### 0.2.2
+
+Add `Api.setHeader()`.
+
 ### 0.2.1
 
 Moved some common types. All projects should change `typings/index.d.ts` to `import 'abyss/typings';` and remove most custom types.

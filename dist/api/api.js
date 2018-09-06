@@ -27,6 +27,9 @@ exports.Api = {
     },
     getAuthToken() {
         return authToken;
+    },
+    setHeader(header, value) {
+        getApi().defaults.headers.common[header] = value;
     }
 };
 class Repository {

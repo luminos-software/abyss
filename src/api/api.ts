@@ -54,6 +54,10 @@ export const Api = {
 
   getAuthToken() {
     return authToken;
+  },
+
+  setHeader(header: string, value: string | null | undefined) {
+    getApi().defaults.headers.common[header] = value;
   }
 };
 
