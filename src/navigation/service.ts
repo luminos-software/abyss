@@ -1,25 +1,6 @@
-import {
-  DrawerActions,
-  NavigationAction,
-  NavigationActions,
-  NavigationCloseDrawerAction,
-  NavigationContainerComponent,
-  NavigationNavigateActionPayload,
-  NavigationOpenDrawerAction,
-  NavigationResetActionPayload,
-  NavigationState,
-  NavigationToggleDrawerAction,
-  StackActions
-} from 'react-navigation';
+import { DrawerActions, NavigationAction, NavigationActions, NavigationContainerComponent, NavigationNavigateActionPayload, NavigationResetActionPayload, NavigationState, StackActions } from 'react-navigation';
 
 let navigator: NavigationContainerComponent | null = null;
-
-// TODO: fix this
-type NavigationActionHack =
-  | NavigationAction
-  | NavigationToggleDrawerAction
-  | NavigationOpenDrawerAction
-  | NavigationCloseDrawerAction;
 
 const getNavigationScreen = (navState: NavigationState): string => {
   const route = navState.routes[navState.index];
@@ -29,14 +10,12 @@ const getNavigationScreen = (navState: NavigationState): string => {
   return route.routeName;
 };
 
-const dispatch = (action: NavigationActionHack) => {
+const dispatch = (action: NavigationAction) => {
   if (__DEV__) {
     // tslint:disable-next-line
     console.log(`Navigation action: ${action.type} ${(action as any).routeName}`);
   }
-  // TODO: fix this
-  // tslint:disable-next-line:no-any
-  return (navigator && navigator.dispatch(action as any)) || false;
+  return (navigator && navigator.dispatch(action)) || false;
 };
 
 export const Navigation = {
@@ -55,7 +34,7 @@ export const Navigation = {
     return getNavigationScreen(navState);
   },
 
-  dispatch(action: NavigationActionHack) {
+  dispatch(action: NavigationAction) {
     return dispatch(action);
   },
 

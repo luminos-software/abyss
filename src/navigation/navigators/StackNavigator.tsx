@@ -105,7 +105,7 @@ export const StackScreen = {
     />
   ),
 
-  connectTitle<State extends {}>(mapStateToProps: (state: State) => Partial<HeaderTitleProps>) {
+  connectTitle<State extends {}>(mapStateToProps: (state: State) => HeaderTitleProps) {
     return connect(mapStateToProps)(HeaderTitleView);
   }
 };

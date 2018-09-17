@@ -1,9 +1,8 @@
-import { NavigationAction, NavigationCloseDrawerAction, NavigationContainerComponent, NavigationNavigateActionPayload, NavigationOpenDrawerAction, NavigationResetActionPayload, NavigationState, NavigationToggleDrawerAction } from 'react-navigation';
-declare type NavigationActionHack = NavigationAction | NavigationToggleDrawerAction | NavigationOpenDrawerAction | NavigationCloseDrawerAction;
+import { NavigationAction, NavigationContainerComponent, NavigationNavigateActionPayload, NavigationResetActionPayload, NavigationState } from 'react-navigation';
 export declare const Navigation: {
     setNavigator(navigationContainer: NavigationContainerComponent): void;
     getCurrentScreen(navState?: NavigationState | undefined): string | null;
-    dispatch(action: NavigationActionHack): boolean;
+    dispatch(action: NavigationAction): boolean;
     navigate(routeName: string, options?: Partial<NavigationNavigateActionPayload> | undefined): boolean;
     back(): boolean;
     reset(options: NavigationResetActionPayload): boolean;
@@ -11,4 +10,3 @@ export declare const Navigation: {
     openDrawer(): boolean;
     closeDrawer(): boolean;
 };
-export {};

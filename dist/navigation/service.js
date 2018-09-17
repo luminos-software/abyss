@@ -14,8 +14,6 @@ const dispatch = (action) => {
         // tslint:disable-next-line
         console.log(`Navigation action: ${action.type} ${action.routeName}`);
     }
-    // TODO: fix this
-    // tslint:disable-next-line:no-any
     return (navigator && navigator.dispatch(action)) || false;
 };
 exports.Navigation = {
