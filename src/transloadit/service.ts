@@ -1,6 +1,6 @@
 import Hashes from 'jshashes';
 import moment from 'moment';
-import FetchBlob from 'react-native-fetch-blob';
+import FetchBlob from 'rn-fetch-blob';
 import { AsyncActionCreators } from 'typescript-fsa';
 import { Api } from '../api/api';
 import { AbyssConfig } from '../config';

@@ -1,5 +1,7 @@
 declare module 'react-native-restart' {
-  export default {
-    Restart(): void;
-  };
+  class RNRestart {
+    static Restart(): void;
+  }
+
+  export default RNRestart;
 }
