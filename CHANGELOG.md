@@ -1,3 +1,11 @@
+### 0.3.2
+
+Replace `react-native-fetch-blob` with `rn-fetch-blob`.
+
+### 0.3.0
+
+React Native 0.57 is now required.
+
 ### 0.2.2
 
 Add `Api.setHeader()`.
