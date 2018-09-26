@@ -8,7 +8,7 @@ import { AbyssConfig } from '../config';
 
 const API_URL = 'https://api2.transloadit.com';
 
-const fetchBlob = (): FetchBlob => require('rn-fetch-blob'); // tslint:disable-line:no-require-imports
+const fetchBlob = (): FetchBlob => require('rn-fetch-blob').default; // tslint:disable-line:no-require-imports
 
 const generateParams = (template: string) => {
   const expiresAt = moment()

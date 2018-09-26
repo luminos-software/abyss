@@ -8,7 +8,7 @@ const moment_1 = __importDefault(require("moment"));
 const api_1 = require("../api/api");
 const config_1 = require("../config");
 const API_URL = 'https://api2.transloadit.com';
-const fetchBlob = () => require('rn-fetch-blob'); // tslint:disable-line:no-require-imports
+const fetchBlob = () => require('rn-fetch-blob').default; // tslint:disable-line:no-require-imports
 const generateParams = (template) => {
     const expiresAt = moment_1.default()
         .add(3, 'hours')
