@@ -8,6 +8,8 @@ import { store } from '../redux/createStore';
 
 const API_URL = 'https://api2.transloadit.com';
 
+const fetchBlob = (): FetchBlob => require('rn-fetch-blob'); // tslint:disable-line:no-require-imports
+
 const generateParams = (template: string) => {
   const expiresAt = moment()
     .add(3, 'hours')
@@ -61,17 +63,18 @@ export const Transloadit = {
 
     const extraFetchParams = Object.keys(extraParams || {}).map(key => ({ name: key, data: extraParams[key] }));
 
-    return FetchBlob.fetch(
-      'POST',
-      `${API_URL}/assemblies`,
-      { 'Content-Type': 'multipart/form-data' },
-      [
-        { name: 'params', data: params },
-        { name: 'signature', data: signature },
-        { name: 'file', filename: 'file', data: FetchBlob.wrap(fileUri) },
-        { name: 'auth_token', data: Api.getAuthToken() }
-      ].concat(extraFetchParams)
-    )
+    return fetchBlob()
+      .fetch(
+        'POST',
+        `${API_URL}/assemblies`,
+        { 'Content-Type': 'multipart/form-data' },
+        [
+          { name: 'params', data: params },
+          { name: 'signature', data: signature },
+          { name: 'file', filename: 'file', data: fetchBlob().wrap(fileUri) },
+          { name: 'auth_token', data: Api.getAuthToken() }
+        ].concat(extraFetchParams)
+      )
       .uploadProgress((written, total) => dispatch(fileUri, written, total))
       .then(() => dispatch(fileUri, 1, 1));
   }

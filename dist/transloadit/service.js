@@ -5,11 +5,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const jshashes_1 = __importDefault(require("jshashes"));
 const moment_1 = __importDefault(require("moment"));
-const rn_fetch_blob_1 = __importDefault(require("rn-fetch-blob"));
 const api_1 = require("../api/api");
 const config_1 = require("../config");
 const createStore_1 = require("../redux/createStore");
 const API_URL = 'https://api2.transloadit.com';
+const fetchBlob = () => require('rn-fetch-blob'); // tslint:disable-line:no-require-imports
 const generateParams = (template) => {
     const expiresAt = moment_1.default()
         .add(3, 'hours')
@@ -45,10 +45,11 @@ exports.Transloadit = {
         const params = JSON.stringify(generateParams(config_1.AbyssConfig.transloadit.templates[template]));
         const signature = sign(params);
         const extraFetchParams = Object.keys(extraParams || {}).map(key => ({ name: key, data: extraParams[key] }));
-        return rn_fetch_blob_1.default.fetch('POST', `${API_URL}/assemblies`, { 'Content-Type': 'multipart/form-data' }, [
+        return fetchBlob()
+            .fetch('POST', `${API_URL}/assemblies`, { 'Content-Type': 'multipart/form-data' }, [
             { name: 'params', data: params },
             { name: 'signature', data: signature },
-            { name: 'file', filename: 'file', data: rn_fetch_blob_1.default.wrap(fileUri) },
+            { name: 'file', filename: 'file', data: fetchBlob().wrap(fileUri) },
             { name: 'auth_token', data: api_1.Api.getAuthToken() }
         ].concat(extraFetchParams))
             .uploadProgress((written, total) => dispatch(fileUri, written, total))
