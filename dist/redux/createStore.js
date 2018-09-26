@@ -16,6 +16,7 @@ const redux_1 = require("redux");
 const developmentOnly_1 = require("redux-devtools-extension/developmentOnly");
 const redux_observable_1 = require("redux-observable");
 const middleware_1 = require("../transloadit/middleware");
+const service_1 = require("../transloadit/service");
 const apiMiddleware_1 = require("./apiMiddleware");
 const loggerMiddleware_1 = require("./loggerMiddleware");
 const offline_1 = require("./offline");
@@ -40,6 +41,7 @@ function createReduxStore(epics, reducers, config) {
     const reducer = redux_1.combineReducers(reducers);
     const newStore = redux_1.createStore(reducer, enhancer);
     exports.store = newStore;
+    config.transloadit && service_1.setTransloaditReduxStore(exports.store);
     epicMiddleware.run(redux_observable_1.combineEpics(...ramda_1.default.values(ramda_1.default.mergeAll([offlineEpics, epics]))));
     return newStore;
 }

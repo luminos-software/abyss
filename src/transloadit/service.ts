@@ -1,10 +1,10 @@
 import Hashes from 'jshashes';
 import moment from 'moment';
+import { Store } from 'redux';
 import FetchBlob from 'rn-fetch-blob';
 import { AsyncActionCreators } from 'typescript-fsa';
 import { Api } from '../api/api';
 import { AbyssConfig } from '../config';
-import { store } from '../redux/createStore';
 
 const API_URL = 'https://api2.transloadit.com';
 
@@ -47,37 +47,41 @@ export const Transloadit = {
         }
       }
     };
-  },
-
-  uploadFile({
-    fileUri,
-    template,
-    extraParams
-  }: {
-    fileUri: string;
-    template: string;
-    extraParams: Record<string, string>;
-  }) {
-    const params = JSON.stringify(generateParams(AbyssConfig.transloadit.templates[template]));
-    const signature = sign(params);
-
-    const extraFetchParams = Object.keys(extraParams || {}).map(key => ({ name: key, data: extraParams[key] }));
-
-    return fetchBlob()
-      .fetch(
-        'POST',
-        `${API_URL}/assemblies`,
-        { 'Content-Type': 'multipart/form-data' },
-        [
-          { name: 'params', data: params },
-          { name: 'signature', data: signature },
-          { name: 'file', filename: 'file', data: fetchBlob().wrap(fileUri) },
-          { name: 'auth_token', data: Api.getAuthToken() }
-        ].concat(extraFetchParams)
-      )
-      .uploadProgress((written, total) => dispatch(fileUri, written, total))
-      .then(() => dispatch(fileUri, 1, 1));
   }
+};
+
+let store: Store | null = null;
+
+export const setTransloaditReduxStore = (newStore: Store) => (store = newStore);
+
+export const uploadFile = ({
+  fileUri,
+  template,
+  extraParams
+}: {
+  fileUri: string;
+  template: string;
+  extraParams: Record<string, string>;
+}) => {
+  const params = JSON.stringify(generateParams(AbyssConfig.transloadit.templates[template]));
+  const signature = sign(params);
+
+  const extraFetchParams = Object.keys(extraParams || {}).map(key => ({ name: key, data: extraParams[key] }));
+
+  return fetchBlob()
+    .fetch(
+      'POST',
+      `${API_URL}/assemblies`,
+      { 'Content-Type': 'multipart/form-data' },
+      [
+        { name: 'params', data: params },
+        { name: 'signature', data: signature },
+        { name: 'file', filename: 'file', data: fetchBlob().wrap(fileUri) },
+        { name: 'auth_token', data: Api.getAuthToken() }
+      ].concat(extraFetchParams)
+    )
+    .uploadProgress((written, total) => dispatch(fileUri, written, total))
+    .then(() => dispatch(fileUri, 1, 1));
 };
 
 const dispatch = (file: string, written: number, total: number) =>

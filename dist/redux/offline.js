@@ -23,7 +23,7 @@ exports.offlineConfig = Object.assign({}, defaults_1.default, { effect: (effect,
             return getApiCall(effect.action)(effect.params);
         }
         if (action.type === 'transloadit/UPLOAD_FILE') {
-            return service_1.Transloadit.uploadFile(effect);
+            return service_1.uploadFile(effect);
         }
         throw new Error(`Invalid offline action type: ${action.type}`);
     }, defaultCommit: { type: 'offline/COMMIT' }, defaultRollback: { type: 'offline/ROLLBACK' }, persistOptions: {

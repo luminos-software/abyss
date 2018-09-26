@@ -1,10 +1,21 @@
 import { offline } from '@redux-offline/redux-offline';
 import { Config } from '@redux-offline/redux-offline/lib/types';
 import R from 'ramda';
-import { Action, applyMiddleware, combineReducers, compose, createStore, Middleware, Reducer, Store, StoreEnhancer } from 'redux';
+import {
+  Action,
+  applyMiddleware,
+  combineReducers,
+  compose,
+  createStore,
+  Middleware,
+  Reducer,
+  Store,
+  StoreEnhancer
+} from 'redux';
 import { devToolsEnhancer } from 'redux-devtools-extension/developmentOnly';
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
 import { transloaditMiddleware } from '../transloadit/middleware';
+import { setTransloaditReduxStore } from '../transloadit/service';
 import { apiMiddleware } from './apiMiddleware';
 import { loggerMiddleware } from './loggerMiddleware';
 import { offlineConfig } from './offline';
@@ -42,6 +53,7 @@ export function createReduxStore<State>(epics: any, reducers: any, config: IRedu
 
   const newStore: Store<State> = createStore(reducer, enhancer);
   store = newStore;
+  config.transloadit && setTransloaditReduxStore(store);
 
   epicMiddleware.run(combineEpics(...R.values(R.mergeAll([offlineEpics, epics]))));
 

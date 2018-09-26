@@ -7,7 +7,6 @@ const jshashes_1 = __importDefault(require("jshashes"));
 const moment_1 = __importDefault(require("moment"));
 const api_1 = require("../api/api");
 const config_1 = require("../config");
-const createStore_1 = require("../redux/createStore");
 const API_URL = 'https://api2.transloadit.com';
 const fetchBlob = () => require('rn-fetch-blob'); // tslint:disable-line:no-require-imports
 const generateParams = (template) => {
@@ -40,23 +39,25 @@ exports.Transloadit = {
                 }
             }
         };
-    },
-    uploadFile({ fileUri, template, extraParams }) {
-        const params = JSON.stringify(generateParams(config_1.AbyssConfig.transloadit.templates[template]));
-        const signature = sign(params);
-        const extraFetchParams = Object.keys(extraParams || {}).map(key => ({ name: key, data: extraParams[key] }));
-        return fetchBlob()
-            .fetch('POST', `${API_URL}/assemblies`, { 'Content-Type': 'multipart/form-data' }, [
-            { name: 'params', data: params },
-            { name: 'signature', data: signature },
-            { name: 'file', filename: 'file', data: fetchBlob().wrap(fileUri) },
-            { name: 'auth_token', data: api_1.Api.getAuthToken() }
-        ].concat(extraFetchParams))
-            .uploadProgress((written, total) => dispatch(fileUri, written, total))
-            .then(() => dispatch(fileUri, 1, 1));
     }
 };
+let store = null;
+exports.setTransloaditReduxStore = (newStore) => (store = newStore);
+exports.uploadFile = ({ fileUri, template, extraParams }) => {
+    const params = JSON.stringify(generateParams(config_1.AbyssConfig.transloadit.templates[template]));
+    const signature = sign(params);
+    const extraFetchParams = Object.keys(extraParams || {}).map(key => ({ name: key, data: extraParams[key] }));
+    return fetchBlob()
+        .fetch('POST', `${API_URL}/assemblies`, { 'Content-Type': 'multipart/form-data' }, [
+        { name: 'params', data: params },
+        { name: 'signature', data: signature },
+        { name: 'file', filename: 'file', data: fetchBlob().wrap(fileUri) },
+        { name: 'auth_token', data: api_1.Api.getAuthToken() }
+    ].concat(extraFetchParams))
+        .uploadProgress((written, total) => dispatch(fileUri, written, total))
+        .then(() => dispatch(fileUri, 1, 1));
+};
 const dispatch = (file, written, total) => config_1.AbyssConfig.transloadit.progressAction &&
-    createStore_1.store &&
-    createStore_1.store.dispatch(config_1.AbyssConfig.transloadit.progressAction({ file, written, total }));
+    store &&
+    store.dispatch(config_1.AbyssConfig.transloadit.progressAction({ file, written, total }));
 //# sourceMappingURL=service.js.map

@@ -3,7 +3,7 @@ import { Config } from '@redux-offline/redux-offline/lib/types';
 import { AxiosPromise } from 'axios';
 import { AsyncStorage } from 'react-native';
 import { AbyssConfig } from '../config';
-import { Transloadit } from '../transloadit/service';
+import { uploadFile } from '../transloadit/service';
 import { jsonapiDatastorePersistence } from './jsonapiDatastorePersistence';
 
 // clear the persist cache when reducerVersion changes (dev mostly)
@@ -24,7 +24,7 @@ export const offlineConfig: Config = {
       return getApiCall(effect.action)(effect.params);
     }
     if (action.type === 'transloadit/UPLOAD_FILE') {
-      return Transloadit.uploadFile(effect);
+      return uploadFile(effect);
     }
     throw new Error(`Invalid offline action type: ${action.type}`);
   },
