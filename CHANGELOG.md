@@ -1,3 +1,9 @@
+## Only breaking changes are listed here
+
+### 0.3.5
+
+Chnage the `react-native-actioncable` typings to match `@types/actioncable` more closely.
+
 ### 0.3.2
 
 Replace `react-native-fetch-blob` with `rn-fetch-blob`.
