@@ -56,7 +56,12 @@ exports.StackScreen = {
     },
     withDefaultHeader(Component, options = {}) {
         const { disableBackButton, safeAreaColor, safeAreaHideTop, safeAreaHideBottom } = options, navigationOptions = __rest(options, ["disableBackButton", "safeAreaColor", "safeAreaHideTop", "safeAreaHideBottom"]);
-        return createStackScreen(Component, Object.assign({}, SCREEN_WITH_HEADER_DEFAULTS, navigationOptions), { disableBackButton, safeAreaColor, safeAreaHideTop: true, safeAreaHideBottom });
+        return createStackScreen(Component, ramda_1.default.mergeDeepRight(SCREEN_WITH_HEADER_DEFAULTS, navigationOptions), {
+            disableBackButton,
+            safeAreaColor,
+            safeAreaHideTop: true,
+            safeAreaHideBottom
+        });
     },
     BackButton: (props) => (react_1.default.createElement(react_navigation_1.HeaderBackButton, Object.assign({ title: SCREEN_WITH_HEADER_DEFAULTS.headerBackTitle, tintColor: SCREEN_WITH_HEADER_DEFAULTS.headerTintColor, titleStyle: SCREEN_WITH_HEADER_DEFAULTS.headerBackTitleStyle, truncatedTitle: SCREEN_WITH_HEADER_DEFAULTS.headerTruncatedBackTitle, pressColorAndroid: SCREEN_WITH_HEADER_DEFAULTS.headerPressColorAndroid, onPress: service_1.Navigation.back }, props))),
     connectTitle(mapStateToProps) {

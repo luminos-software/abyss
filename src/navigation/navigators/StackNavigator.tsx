@@ -83,14 +83,12 @@ export const StackScreen = {
     options: OverriddenNavigationStackScreenOptions & ICustomNavigationParams = {}
   ) {
     const { disableBackButton, safeAreaColor, safeAreaHideTop, safeAreaHideBottom, ...navigationOptions } = options;
-    return createStackScreen(
-      Component,
-      {
-        ...SCREEN_WITH_HEADER_DEFAULTS,
-        ...navigationOptions
-      },
-      { disableBackButton, safeAreaColor, safeAreaHideTop: true, safeAreaHideBottom }
-    );
+    return createStackScreen(Component, R.mergeDeepRight(SCREEN_WITH_HEADER_DEFAULTS, navigationOptions), {
+      disableBackButton,
+      safeAreaColor,
+      safeAreaHideTop: true,
+      safeAreaHideBottom
+    });
   },
 
   BackButton: (props: HeaderBackButtonProps) => (
