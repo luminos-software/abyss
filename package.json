@@ -39,10 +39,10 @@
     "typescript-fsa-reducers": "0.4.5"
   },
   "devDependencies": {
-    "@babel/core": "7.1.0",
+    "@babel/core": "7.1.2",
     "@types/ramda": "0.25.38",
     "@types/react-native": "0.57.0",
-    "@types/react-navigation": "2.0.22",
+    "@types/react-navigation": "2.0.23",
     "@types/react-redux": "6.0.9",
     "@types/redux-logger": "3.0.6",
     "@types/tinycolor2": "1.4.1",
