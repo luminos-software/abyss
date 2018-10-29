@@ -1,5 +1,9 @@
 ## Only breaking changes are listed here
 
+### 0.4.0
+
+Switch to `react-native-typescript-transformer` and `ts-jest`. Rename the `redux` directory to `state`.
+
 ### 0.3.5
 
 Chnage the `react-native-actioncable` typings to match `@types/actioncable` more closely.
