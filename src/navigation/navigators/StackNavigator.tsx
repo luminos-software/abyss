@@ -1,11 +1,10 @@
 import R from 'ramda';
 import React from 'react';
-import { Platform, TextProps, ViewStyle } from 'react-native';
+import { Platform, ViewStyle } from 'react-native';
 import {
   createStackNavigator as RNcreateStackNavigator,
   HeaderBackButton,
   HeaderBackButtonProps,
-  HeaderTitle,
   NavigationComponent,
   NavigationRouteConfigMap,
   NavigationScreenConfig,
@@ -16,11 +15,8 @@ import {
   StackNavigatorConfig
 } from 'react-navigation';
 import { AndroidBackHandler } from 'react-navigation-backhandler';
-import { Connect } from 'react-redux';
 import { getMetrics } from '../../theme/metrics';
 import { Navigation } from '../service';
-
-const getConnect = (): Connect => require('react-redux').connect; // tslint:disable-line:no-require-imports
 
 // tslint:disable:no-any
 
@@ -46,11 +42,6 @@ const SCREEN_WITHOUT_HEADER_DEFAULTS: OverriddenNavigationStackScreenOptions = {
   header: null,
   headerBackTitle: ' '
 };
-
-type HeaderTitleProps = TextProps & { title: string };
-const HeaderTitleView: React.SFC<HeaderTitleProps> = ({ title, ...props }) => (
-  <HeaderTitle {...props}>{title}</HeaderTitle>
-);
 
 export const createStackNavigator = (screens: NavigationRouteConfigMap, options: StackNavigatorConfig = {}) =>
   RNcreateStackNavigator(screens, {
@@ -106,11 +97,7 @@ export const StackScreen = {
       onPress={Navigation.back}
       {...props}
     />
-  ),
-
-  connectTitle<State extends {}>(mapStateToProps: (state: State) => HeaderTitleProps) {
-    return getConnect()(mapStateToProps)(HeaderTitleView);
-  }
+  )
 };
 
 const createStackScreen = (

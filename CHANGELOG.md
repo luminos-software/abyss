@@ -1,5 +1,9 @@
 ## Only breaking changes are listed here
 
+### 0.4.4
+
+Move `StackNavigator.connectTitle()` to the top level so `StackNavigator` doesn't depend on redux.
+
 ### 0.4.0
 
 Switch to `react-native-typescript-transformer` and `ts-jest`. Rename the `redux` directory to `state`.
