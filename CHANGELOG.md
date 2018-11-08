@@ -1,6 +1,6 @@
 ## Only breaking changes are listed here
 
-### 0.4.4
+### 0.4.5
 
 Move `StackNavigator.connectTitle()` to the top level so `StackNavigator` doesn't depend on redux.
 
