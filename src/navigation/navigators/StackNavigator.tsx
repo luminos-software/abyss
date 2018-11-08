@@ -16,9 +16,11 @@ import {
   StackNavigatorConfig
 } from 'react-navigation';
 import { AndroidBackHandler } from 'react-navigation-backhandler';
-import { connect } from 'react-redux';
+import { Connect } from 'react-redux';
 import { getMetrics } from '../../theme/metrics';
 import { Navigation } from '../service';
+
+const getConnect = (): Connect => require('react-redux').connect; // tslint:disable-line:no-require-imports
 
 // tslint:disable:no-any
 
@@ -107,7 +109,7 @@ export const StackScreen = {
   ),
 
   connectTitle<State extends {}>(mapStateToProps: (state: State) => HeaderTitleProps) {
-    return connect(mapStateToProps)(HeaderTitleView);
+    return getConnect()(mapStateToProps)(HeaderTitleView);
   }
 };
 
