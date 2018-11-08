@@ -13,8 +13,8 @@ interface ICustomNavigationParams {
 }
 export declare const StackScreen: {
     setDefaults(defaults: OverriddenNavigationStackScreenOptions): void;
-    withoutHeader(Component: React.ComponentType<{}>, options?: OverriddenNavigationStackScreenOptions & ICustomNavigationParams): any;
-    withDefaultHeader(Component: React.ComponentType<{}>, options?: OverriddenNavigationStackScreenOptions & ICustomNavigationParams): any;
+    withoutHeader(Component: React.ComponentType<any>, options?: OverriddenNavigationStackScreenOptions & ICustomNavigationParams): any;
+    withDefaultHeader(Component: React.ComponentType<any>, options?: OverriddenNavigationStackScreenOptions & ICustomNavigationParams): any;
     BackButton: (props: HeaderBackButtonProps) => JSX.Element;
     connectTitle<State extends {}>(mapStateToProps: (state: State) => HeaderTitleProps): import("react-redux").ConnectedComponentClass<React.StatelessComponent<HeaderTitleProps>, Pick<HeaderTitleProps, never>>;
 };

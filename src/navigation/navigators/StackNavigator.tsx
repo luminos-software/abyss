@@ -9,6 +9,7 @@ import {
   NavigationComponent,
   NavigationRouteConfigMap,
   NavigationScreenConfig,
+  NavigationScreenProp,
   NavigationStackScreenOptions,
   OverriddenNavigationStackScreenOptions,
   SafeAreaView,
@@ -18,6 +19,8 @@ import { AndroidBackHandler } from 'react-navigation-backhandler';
 import { connect } from 'react-redux';
 import { getMetrics } from '../../theme/metrics';
 import { Navigation } from '../service';
+
+// tslint:disable:no-any
 
 const NAV_OPTIONS_DEFAULTS: NavigationScreenConfig<NavigationStackScreenOptions> = {
   gesturesEnabled: false
@@ -66,7 +69,7 @@ export const StackScreen = {
   },
 
   withoutHeader(
-    Component: React.ComponentType,
+    Component: React.ComponentType<any>,
     options: OverriddenNavigationStackScreenOptions & ICustomNavigationParams = {}
   ) {
     const { disableBackButton, safeAreaColor, safeAreaHideTop, safeAreaHideBottom, ...navigationOptions } = options;
@@ -79,7 +82,7 @@ export const StackScreen = {
   },
 
   withDefaultHeader(
-    Component: React.ComponentType,
+    Component: React.ComponentType<any>,
     options: OverriddenNavigationStackScreenOptions & ICustomNavigationParams = {}
   ) {
     const { disableBackButton, safeAreaColor, safeAreaHideTop, safeAreaHideBottom, ...navigationOptions } = options;
@@ -109,12 +112,12 @@ export const StackScreen = {
 };
 
 const createStackScreen = (
-  Component: React.ComponentType,
+  Component: React.ComponentType<any>,
   options: OverriddenNavigationStackScreenOptions = {},
   customOptions: ICustomNavigationParams = {},
   safeAreaStyle: ViewStyle = {}
 ): NavigationComponent =>
-  class extends React.Component<{}, {}> {
+  class extends React.Component<{ navigation: NavigationScreenProp<{}> }> {
     static navigationOptions: OverriddenNavigationStackScreenOptions = { ...options };
 
     render() {
@@ -130,7 +133,7 @@ const createStackScreen = (
             bottom: customOptions.safeAreaHideBottom ? 'never' : 'always'
           }}
         >
-          <Component />
+          <Component navigation={this.props.navigation} />
         </SafeAreaView>
       );
 

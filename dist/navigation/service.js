@@ -12,7 +12,7 @@ const getNavigationScreen = (navState) => {
 const dispatch = (action) => {
     if (__DEV__) {
         // tslint:disable-next-line
-        console.log(`Navigation action: ${action.type} ${action.routeName}`);
+        console.log(`Navigation action: ${action.type} ${action.routeName}`, action.params);
     }
     return (navigator && navigator.dispatch(action)) || false;
 };

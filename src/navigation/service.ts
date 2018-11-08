@@ -1,4 +1,13 @@
-import { DrawerActions, NavigationAction, NavigationActions, NavigationContainerComponent, NavigationNavigateActionPayload, NavigationResetActionPayload, NavigationState, StackActions } from 'react-navigation';
+import {
+  DrawerActions,
+  NavigationAction,
+  NavigationActions,
+  NavigationContainerComponent,
+  NavigationNavigateActionPayload,
+  NavigationResetActionPayload,
+  NavigationState,
+  StackActions
+} from 'react-navigation';
 
 let navigator: NavigationContainerComponent | null = null;
 
@@ -13,7 +22,7 @@ const getNavigationScreen = (navState: NavigationState): string => {
 const dispatch = (action: NavigationAction) => {
   if (__DEV__) {
     // tslint:disable-next-line
-    console.log(`Navigation action: ${action.type} ${(action as any).routeName}`);
+    console.log(`Navigation action: ${action.type} ${(action as any).routeName}`, (action as any).params);
   }
   return (navigator && navigator.dispatch(action)) || false;
 };

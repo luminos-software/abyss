@@ -15,6 +15,7 @@
           "repositories": "./src/repositories",
           "services": "./src/services",
           "state": "./src/state",
+          "stores": "./src/stores",
           "theme": "./src/theme",
           "util": "./src/util"
         }

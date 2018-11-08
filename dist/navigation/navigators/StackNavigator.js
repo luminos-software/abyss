@@ -20,6 +20,7 @@ const react_navigation_backhandler_1 = require("react-navigation-backhandler");
 const react_redux_1 = require("react-redux");
 const metrics_1 = require("../../theme/metrics");
 const service_1 = require("../service");
+// tslint:disable:no-any
 const NAV_OPTIONS_DEFAULTS = {
     gesturesEnabled: false
 };
@@ -74,7 +75,7 @@ const createStackScreen = (Component, options = {}, customOptions = {}, safeArea
                     top: customOptions.safeAreaHideTop ? 'never' : 'always',
                     bottom: customOptions.safeAreaHideBottom ? 'never' : 'always'
                 } },
-                react_1.default.createElement(Component, null)));
+                react_1.default.createElement(Component, { navigation: this.props.navigation })));
             if (customOptions.disableBackButton) {
                 return react_1.default.createElement(react_navigation_backhandler_1.AndroidBackHandler, { onBackPress: () => true }, screen);
             }
