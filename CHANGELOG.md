@@ -14,7 +14,7 @@ Switch to `react-native-typescript-transformer` and `ts-jest`. Rename the `redux
 
 ### 0.3.5
 
-Chnage the `react-native-actioncable` typings to match `@types/actioncable` more closely.
+Change the `react-native-actioncable` typings to match `@types/actioncable` more closely.
 
 ### 0.3.2
 
