@@ -1,5 +1,9 @@
 ## Only breaking changes are listed here
 
+### 0.4.6
+
+Add `viewStyle`, `textStyle`, `imageStyle` as new best practice.
+
 ### 0.4.5
 
 Move `StackNavigator.connectTitle()` to the top level so `StackNavigator` doesn't depend on redux.
