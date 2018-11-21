@@ -1,5 +1,9 @@
 ## Only breaking changes are listed here
 
+### 0.4.8
+
+Add `parseLicenses`.
+
 ### 0.4.7
 
 Rename `DevToolsScreen` to `ThemeSelectorScreen`.

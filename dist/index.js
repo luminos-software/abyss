@@ -34,6 +34,8 @@ var datastore_1 = require("./util/datastore");
 exports.DatastoreUtil = datastore_1.DatastoreUtil;
 var email_1 = require("./util/email");
 exports.EmailUtil = email_1.EmailUtil;
+var licenses_1 = require("./util/licenses");
+exports.parseLicenses = licenses_1.parseLicenses;
 if (__DEV__) {
     // for rn-debugger
     global.XMLHttpRequest = global.originalXMLHttpRequest || global.XMLHttpRequest;

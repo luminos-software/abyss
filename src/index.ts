@@ -15,6 +15,7 @@ export { ThemeGate } from './theme/ThemeGate';
 export { Transloadit } from './transloadit/service';
 export { DatastoreUtil } from './util/datastore';
 export { EmailUtil } from './util/email';
+export { parseLicenses } from './util/licenses';
 export { Arguments, InferFromAxiosReturnType } from './util/types';
 
 if (__DEV__) {
