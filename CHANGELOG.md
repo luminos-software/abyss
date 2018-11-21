@@ -1,5 +1,9 @@
 ## Only breaking changes are listed here
 
+### 0.4.7
+
+Rename `DevToolsScreen` to `ThemeSelectorScreen`.
+
 ### 0.4.6
 
 Add `viewStyle`, `textStyle`, `imageStyle` as new best practice.

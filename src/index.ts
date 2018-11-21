@@ -3,7 +3,7 @@ import { UIManager } from 'react-native';
 export { Api, ApiActions, IApiError, Repository } from './api/api';
 export { datastore } from './api/jsonapiStore';
 export { AbyssConfig } from './config';
-export { DevToolsScreen } from './devTools/DevToolsScreen';
+export { ThemeSelectorScreen } from './devTools/ThemeSelectorScreen';
 export { createStackNavigator, StackScreen } from './navigation/navigators/StackNavigator';
 export { createTabNavigator } from './navigation/navigators/TabNavigator';
 export { Navigation } from './navigation/service';
