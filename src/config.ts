@@ -1,4 +1,4 @@
-import { AxiosPromise } from 'axios';
+import { AxiosError, AxiosPromise } from 'axios';
 import { ActionCreator } from 'typescript-fsa';
 
 interface IAbyssConfig {
@@ -9,6 +9,7 @@ interface IAbyssConfig {
     // tslint:disable-next-line:no-any
     offlineCalls: Record<string, (...args: any[]) => AxiosPromise>;
     authCalls: string[];
+    onError?: (error: AxiosError) => void;
   };
   redux: {
     reducerVersion: string;

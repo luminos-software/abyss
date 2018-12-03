@@ -47,7 +47,7 @@ export declare class Repository<T> {
     postFreeForm<R>(path: string, body: R): AxiosPromise<T>;
     put(path: string, body: IJsonapiRequest<T>): AxiosPromise<T>;
     patch(path: string, body: IJsonapiRequest<Partial<T>>): AxiosPromise<T>;
-    delete(path: string): AxiosPromise<any>;
+    delete(path: string): AxiosPromise<null>;
 }
 export declare const ApiActions: {
     directCall<P, S, E>(promise: AxiosPromise<S>, asyncAction: AsyncActionCreators<P, S, E>, params: P): IApiAction<S, P>;

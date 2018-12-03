@@ -1,1 +1,1 @@
-{"version":3,"file":"loggerMiddleware.js","sourceRoot":"","sources":["../../src/redux/loggerMiddleware.ts"],"names":[],"mappings":";;AAAA,+CAA4C;AAE/B,QAAA,gBAAgB,GAAG,2BAAY,CAAC;IAC3C,SAAS,EAAE,IAAI;IACf,SAAS,EAAE,GAAG,EAAE,CAAC,OAAO;CACzB,CAAC,CAAC"}
+{"version":3,"file":"loggerMiddleware.js","sourceRoot":"","sources":["../../src/redux/loggerMiddleware.ts"],"names":[],"mappings":";;AACA,+CAA4C;AAE/B,QAAA,gBAAgB,GAAG,2BAAY,CAAC;IAC3C,SAAS,EAAE,IAAI;IACf,SAAS,EAAE,GAAG,EAAE,CAAC,OAAO;CACzB,CAAe,CAAC"}

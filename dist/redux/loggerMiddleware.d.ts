@@ -1,1 +1,2 @@
-export declare const loggerMiddleware: import("redux-logger/node_modules/redux").Middleware;
+import { Middleware } from 'redux';
+export declare const loggerMiddleware: Middleware<{}, any, import("redux").Dispatch<import("redux").AnyAction>>;

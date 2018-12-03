@@ -26,7 +26,7 @@ exports.apiMiddleware = () => next => action => {
         .catch((error) => {
         const errorPayload = exports.buildErrorPayload(error);
         if (!errorPayload.httpCode || errorPayload.httpCode >= 500) {
-            // ErrorNotification.show(errorPayload);
+            config_1.AbyssConfig.api.onError && config_1.AbyssConfig.api.onError(error);
         }
         next({
             type: action.actions.fail.type,

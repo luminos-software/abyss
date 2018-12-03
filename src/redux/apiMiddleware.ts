@@ -33,7 +33,7 @@ export const apiMiddleware: Middleware = () => next => action => {
       const errorPayload = buildErrorPayload(error);
 
       if (!errorPayload.httpCode || errorPayload.httpCode >= 500) {
-        // ErrorNotification.show(errorPayload);
+        AbyssConfig.api.onError && AbyssConfig.api.onError(error);
       }
 
       next({

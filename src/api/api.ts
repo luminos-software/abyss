@@ -83,7 +83,7 @@ export class Repository<T> {
   }
 
   delete(path: string) {
-    return getApi().delete(path);
+    return getApi().delete(path) as AxiosPromise<null>;
   }
 }
 

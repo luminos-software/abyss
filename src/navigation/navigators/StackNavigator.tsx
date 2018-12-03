@@ -10,7 +10,6 @@ import {
   NavigationScreenConfig,
   NavigationScreenProp,
   NavigationStackScreenOptions,
-  OverriddenNavigationStackScreenOptions,
   SafeAreaView,
   StackNavigatorConfig
 } from 'react-navigation';
@@ -38,7 +37,7 @@ let SCREEN_WITH_HEADER_DEFAULTS: NavigationStackScreenOptions = {
   headerBackTitle: ' '
 };
 
-const SCREEN_WITHOUT_HEADER_DEFAULTS: OverriddenNavigationStackScreenOptions = {
+const SCREEN_WITHOUT_HEADER_DEFAULTS: NavigationStackScreenOptions = {
   header: null,
   headerBackTitle: ' '
 };
@@ -57,13 +56,13 @@ interface ICustomNavigationParams {
 }
 
 export const StackScreen = {
-  setDefaults(defaults: OverriddenNavigationStackScreenOptions) {
+  setDefaults(defaults: NavigationStackScreenOptions) {
     SCREEN_WITH_HEADER_DEFAULTS = R.mergeDeepRight(SCREEN_WITH_HEADER_DEFAULTS, defaults);
   },
 
   withoutHeader(
     Component: React.ComponentType<any>,
-    options: OverriddenNavigationStackScreenOptions & ICustomNavigationParams = {}
+    options: NavigationStackScreenOptions & ICustomNavigationParams = {}
   ) {
     const { disableBackButton, safeAreaColor, safeAreaHideTop, safeAreaHideBottom, ...navigationOptions } = options;
     return createStackScreen(
@@ -76,7 +75,7 @@ export const StackScreen = {
 
   withDefaultHeader(
     Component: React.ComponentType<any>,
-    options: OverriddenNavigationStackScreenOptions & ICustomNavigationParams = {}
+    options: NavigationStackScreenOptions & ICustomNavigationParams = {}
   ) {
     const { disableBackButton, safeAreaColor, safeAreaHideTop, safeAreaHideBottom, ...navigationOptions } = options;
     return createStackScreen(Component, R.mergeDeepRight(SCREEN_WITH_HEADER_DEFAULTS, navigationOptions), {
@@ -102,12 +101,12 @@ export const StackScreen = {
 
 const createStackScreen = (
   Component: React.ComponentType<any>,
-  options: OverriddenNavigationStackScreenOptions = {},
+  options: NavigationStackScreenOptions = {},
   customOptions: ICustomNavigationParams = {},
   safeAreaStyle: ViewStyle = {}
 ): NavigationComponent =>
   class extends React.Component<{ navigation: NavigationScreenProp<{}> }> {
-    static navigationOptions: OverriddenNavigationStackScreenOptions = { ...options };
+    static navigationOptions: NavigationStackScreenOptions = { ...options };
 
     render() {
       const screen = (
