@@ -32,8 +32,8 @@ export const apiMiddleware: Middleware = () => next => action => {
     .catch((error: AxiosError) => {
       const errorPayload = buildErrorPayload(error);
 
-      if (!errorPayload.httpCode || errorPayload.httpCode >= 500) {
-        AbyssConfig.api.onError && AbyssConfig.api.onError(error);
+      if (!errorPayload.httpCode || errorPayload.httpCode >= 400) {
+        AbyssConfig.api.onError && AbyssConfig.api.onError(errorPayload);
       }
 
       next({
