@@ -10,5 +10,5 @@ exports.Button = props => (react_1.default.createElement(react_native_1.Touchabl
             { justifyContent: 'center', alignItems: 'center', padding: 10, backgroundColor: '#3e5151', borderRadius: 3 },
             props.style
         ] },
-        react_1.default.createElement(react_native_1.Text, { style: { color: 'white', fontSize: 18 } }, props.title))));
+        react_1.default.createElement(react_native_1.Text, { style: { width: '100%', textAlign: 'center', color: 'white', fontSize: 18 } }, props.title))));
 //# sourceMappingURL=Button.js.map
