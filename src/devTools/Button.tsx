@@ -9,7 +9,7 @@ export const Button: React.SFC<{ title: string; onPress: () => void; style?: Sty
         props.style
       ]}
     >
-      <Text style={{ color: 'white', fontSize: 18 }}>{props.title}</Text>
+      <Text style={{ width: '100%', textAlign: 'center', color: 'white', fontSize: 18 }}>{props.title}</Text>
     </View>
   </TouchableOpacity>
 );
