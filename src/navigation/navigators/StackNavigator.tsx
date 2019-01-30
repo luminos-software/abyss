@@ -10,6 +10,7 @@ import {
   NavigationScreenConfig,
   NavigationScreenProp,
   NavigationStackScreenOptions,
+  OverriddenNavigationStackScreenOptions,
   SafeAreaView,
   StackNavigatorConfig
 } from 'react-navigation';
@@ -62,7 +63,7 @@ export const StackScreen = {
 
   withoutHeader(
     Component: React.ComponentType<any>,
-    options: NavigationStackScreenOptions & ICustomNavigationParams = {}
+    options: OverriddenNavigationStackScreenOptions & ICustomNavigationParams = {}
   ) {
     const { disableBackButton, safeAreaColor, safeAreaHideTop, safeAreaHideBottom, ...navigationOptions } = options;
     return createStackScreen(
@@ -75,7 +76,7 @@ export const StackScreen = {
 
   withDefaultHeader(
     Component: React.ComponentType<any>,
-    options: NavigationStackScreenOptions & ICustomNavigationParams = {}
+    options: OverriddenNavigationStackScreenOptions & ICustomNavigationParams = {}
   ) {
     const { disableBackButton, safeAreaColor, safeAreaHideTop, safeAreaHideBottom, ...navigationOptions } = options;
     return createStackScreen(Component, R.mergeDeepRight(SCREEN_WITH_HEADER_DEFAULTS, navigationOptions), {
@@ -101,12 +102,12 @@ export const StackScreen = {
 
 const createStackScreen = (
   Component: React.ComponentType<any>,
-  options: NavigationStackScreenOptions = {},
+  options: OverriddenNavigationStackScreenOptions = {},
   customOptions: ICustomNavigationParams = {},
   safeAreaStyle: ViewStyle = {}
 ): NavigationComponent =>
   class extends React.Component<{ navigation: NavigationScreenProp<{}> }> {
-    static navigationOptions: NavigationStackScreenOptions = { ...options };
+    static navigationOptions: OverriddenNavigationStackScreenOptions = { ...options };
 
     render() {
       const screen = (
