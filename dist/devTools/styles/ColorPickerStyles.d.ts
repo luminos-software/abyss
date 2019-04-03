@@ -1,29 +1,29 @@
 export declare const styles: {
-    modal: import("react-native").RegisteredStyle<{
+    modal: {
         margin: number;
         alignSelf: "center";
-    }>;
-    modalContent: import("react-native").RegisteredStyle<{
+    };
+    modalContent: {
         width: number;
         backgroundColor: string;
         padding: number;
-    }>;
-    modalText: import("react-native").RegisteredStyle<{
+    };
+    modalText: {
         color: string;
-    }>;
-    modalColorSample: import("react-native").RegisteredStyle<{
+    };
+    modalColorSample: {
         height: number;
         width: string;
         marginVertical: number;
         borderColor: string;
         borderWidth: number;
-    }>;
-    modalTextInput: import("react-native").RegisteredStyle<{
+    };
+    modalTextInput: {
         marginTop: number;
         fontSize: number;
         padding: number;
         borderColor: string;
         borderWidth: number;
         borderRadius: number;
-    }>;
+    };
 };

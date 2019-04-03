@@ -1,3 +1,4 @@
+/// <reference path="../../../typings/react-navigation.d.ts" />
 import React from 'react';
 import { HeaderBackButtonProps, NavigationRouteConfigMap, NavigationStackScreenOptions, OverriddenNavigationStackScreenOptions, StackNavigatorConfig } from 'react-navigation';
 export declare const createStackNavigator: (screens: NavigationRouteConfigMap, options?: StackNavigatorConfig) => import("react-navigation").NavigationContainer;

@@ -1,17 +1,7 @@
 import { offline } from '@redux-offline/redux-offline';
 import { Config } from '@redux-offline/redux-offline/lib/types';
 import R from 'ramda';
-import {
-  Action,
-  applyMiddleware,
-  combineReducers,
-  compose,
-  createStore,
-  Middleware,
-  Reducer,
-  Store,
-  StoreEnhancer
-} from 'redux';
+import { Action, applyMiddleware, combineReducers, compose, createStore, Middleware, Reducer, Store, StoreEnhancer } from 'redux';
 import { devToolsEnhancer } from 'redux-devtools-extension/developmentOnly';
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
 import { transloaditMiddleware } from '../transloadit/middleware';
@@ -33,7 +23,7 @@ const compact = R.reject(R.isNil);
 export function createReduxStore<State>(epics: any, reducers: any, config: IReduxConfig): Store<State, Action> {
   const epicMiddleware = createEpicMiddleware<Action, Action, State>();
 
-  const offlineEnhancer = config.offline ? offline(R.mergeDeepRight(offlineConfig, config.offline)) : null;
+  const offlineEnhancer = config.offline ? offline(R.mergeDeepRight(offlineConfig, config.offline) as Config) : null;
 
   const middlewares = compact([
     apiMiddleware,

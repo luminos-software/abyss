@@ -1,26 +1,26 @@
 export declare const styles: {
-    container: import("react-native").RegisteredStyle<{
+    container: {
         flex: number;
         margin: number;
-    }>;
-    colorText: import("react-native").RegisteredStyle<{
+    };
+    colorText: {
         color: string;
-    }>;
-    colorSample: import("react-native").RegisteredStyle<{
+    };
+    colorSample: {
         width: string;
         height: number;
         marginRight: number;
         borderColor: string;
         borderWidth: number;
         borderRadius: number;
-    }>;
-    colorContainer: import("react-native").RegisteredStyle<{
+    };
+    colorContainer: {
         flexDirection: "row";
         marginVertical: number;
         alignItems: "center";
-    }>;
-    button: import("react-native").RegisteredStyle<{
+    };
+    button: {
         marginBottom: number;
         marginHorizontal: number;
-    }>;
+    };
 };

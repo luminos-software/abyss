@@ -5,7 +5,7 @@ const defaults = {
     swipeEnabled: false,
     animationEnabled: false,
     lazy: true,
-    navigationOptions: {
+    defaultNavigationOptions: {
         tabBarVisible: false
     },
     backBehavior: 'none'
