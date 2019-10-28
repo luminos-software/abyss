@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const ramda_1 = __importDefault(require("ramda"));
 const react_1 = __importDefault(require("react"));
 const react_native_1 = require("react-native");
-const react_native_restart_1 = __importDefault(require("react-native-restart"));
 const tinycolor2_1 = __importDefault(require("tinycolor2"));
 const config_1 = require("../config");
 const Button_1 = require("./Button");
@@ -24,10 +23,10 @@ class ThemeSelector extends react_1.default.PureComponent {
         };
         this.storeColors = () => {
             const colors = ramda_1.default.fromPairs(Object.keys(config_1.AbyssConfig.theme.colors).map((color, index) => [color, tinycolor2_1.default(this.state.colors[index]).toHex8String()]));
-            replaceColors_1.replaceColors(colors).then(() => react_native_restart_1.default && react_native_restart_1.default.Restart());
+            replaceColors_1.replaceColors(colors).then(() => require('react-native-restart').default.Restart());
         };
         this.resetColors = () => {
-            react_native_1.AsyncStorage.removeItem('theme.colors').then(() => react_native_restart_1.default && react_native_restart_1.default.Restart());
+            react_native_1.AsyncStorage.removeItem('theme.colors').then(() => require('react-native-restart').default.Restart());
         };
     }
     render() {

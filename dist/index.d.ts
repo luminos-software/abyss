@@ -1,9 +1,7 @@
 export { Api, ApiActions, IApiError, Repository } from './api/api';
 export { datastore } from './api/jsonapiStore';
 export { AbyssConfig } from './config';
-export { ThemeSelectorScreen } from './devTools/ThemeSelectorScreen';
 export { createStackNavigator, StackScreen } from './navigation/navigators/StackNavigator';
-export { createTabNavigator } from './navigation/navigators/TabNavigator';
 export { Navigation } from './navigation/service';
 export { createReduxStore } from './redux/createStore';
 export { State as OfflineState } from './redux/offlineReducer';

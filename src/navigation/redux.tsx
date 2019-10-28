@@ -1,6 +1,6 @@
 import React from 'react';
 import { TextProps } from 'react-native';
-import { HeaderTitle } from 'react-navigation';
+import { HeaderTitle } from 'react-navigation-stack';
 import { connect } from 'react-redux';
 
 type HeaderTitleProps = TextProps & { title: string };

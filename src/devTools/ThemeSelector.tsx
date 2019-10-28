@@ -1,7 +1,6 @@
 import R from 'ramda';
 import React from 'react';
 import { AsyncStorage, ScrollView, Text, TouchableWithoutFeedback, View } from 'react-native';
-import RNRestart from 'react-native-restart';
 import tinycolor, { ColorFormats } from 'tinycolor2';
 import { AbyssConfig } from '../config';
 import { Button } from './Button';
@@ -33,11 +32,11 @@ export class ThemeSelector extends React.PureComponent<{}, IState> {
       )
     ) as typeof AbyssConfig.theme.colors;
 
-    replaceColors(colors).then(() => RNRestart && RNRestart.Restart());
+    replaceColors(colors).then(() => require('react-native-restart').default.Restart());
   };
 
   resetColors = () => {
-    AsyncStorage.removeItem('theme.colors').then(() => RNRestart && RNRestart.Restart());
+    AsyncStorage.removeItem('theme.colors').then(() => require('react-native-restart').default.Restart());
   };
 
   render() {

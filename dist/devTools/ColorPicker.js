@@ -14,9 +14,9 @@ class ColorPicker extends react_1.default.PureComponent {
     constructor() {
         super(...arguments);
         this.state = { color: this.props.color };
-        this.updateHue = (h) => this.setState({ color: Object.assign({}, this.state.color, { h }) });
-        this.updateSaturation = (s) => this.setState({ color: Object.assign({}, this.state.color, { s }) });
-        this.updateLightness = (l) => this.setState({ color: Object.assign({}, this.state.color, { l }) });
+        this.updateHue = (h) => this.setState({ color: Object.assign(Object.assign({}, this.state.color), { h }) });
+        this.updateSaturation = (s) => this.setState({ color: Object.assign(Object.assign({}, this.state.color), { s }) });
+        this.updateLightness = (l) => this.setState({ color: Object.assign(Object.assign({}, this.state.color), { l }) });
         this.handleRgbChange = (text) => {
             const color = tinycolor2_1.default(text);
             if (text.length === 7 && color.isValid()) {

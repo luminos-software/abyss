@@ -119,9 +119,9 @@ export const metrics = {
 Create navigators:
 
 ```typescript
-import { createTabNavigator, createStackNavigator } from 'abyss';
+import { createStackNavigator } from 'abyss';
 
-export const Navigator = createTabNavigator({ Home: HomeScreen });
+export const Navigator = createStackNavigator({ Home: HomeScreen });
 ```
 
 Create screens:
