@@ -5,18 +5,20 @@ import {
   NavigationContainerComponent,
   NavigationNavigateActionPayload,
   NavigationResetActionPayload,
+  NavigationRoute,
   NavigationState,
   StackActions
 } from 'react-navigation';
 
 let navigator: NavigationContainerComponent | null = null;
 
-const getNavigationScreen = (navState: NavigationState): string => {
+const getNavigationScreen = (navState: NavigationState): NavigationRoute => {
   const route = navState.routes[navState.index];
+
   if (route.index !== undefined) {
-    return getNavigationScreen(route as NavigationState);
+    return getNavigationScreen(route);
   }
-  return route.routeName;
+  return route;
 };
 
 const dispatch = (action: NavigationAction) => {
@@ -32,7 +34,7 @@ export const Navigation = {
     navigator = navigationContainer;
   },
 
-  getCurrentScreen(navState?: NavigationState) {
+  getCurrentScreen(navState?: NavigationState): NavigationRoute | null {
     if (!navState) {
       if (!navigator) {
         return null;

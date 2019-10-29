@@ -7,7 +7,7 @@ const getNavigationScreen = (navState) => {
     if (route.index !== undefined) {
         return getNavigationScreen(route);
     }
-    return route.routeName;
+    return route;
 };
 const dispatch = (action) => {
     if (__DEV__) {
