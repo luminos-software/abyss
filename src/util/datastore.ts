@@ -1,5 +1,4 @@
-import { JsonApiDataStoreModel } from 'jsonapi-datastore';
-import { datastore } from '../api/jsonapiStore';
+import { datastore, JsonApiDataStoreModel } from '../api/jsonapiStore';
 
 function cloneModel<T>(model: T): T {
   if (!(model instanceof JsonApiDataStoreModel)) {

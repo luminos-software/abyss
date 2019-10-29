@@ -1,6 +1,6 @@
 import { UIManager } from 'react-native';
 
-export { Api, ApiActions, IApiError, Repository } from './api/api';
+export { Api, ApiActions, ApiError, Repository } from './api/api';
 export { datastore } from './api/jsonapiStore';
 export { AbyssConfig } from './config';
 export { createStackNavigator, StackScreen } from './navigation/navigators/StackNavigator';

@@ -53,7 +53,7 @@ export declare const ApiActions: {
     directCall<P, S, E>(promise: AxiosPromise<S>, asyncAction: AsyncActionCreators<P, S, E>, params: P): IApiAction<S, P>;
     offlineCall<A, P_1, S_1, E_1>(action: A, asyncAction: AsyncActionCreators<P_1, S_1, E_1>, params: P_1): IOfflineApiAction<A, P_1>;
 };
-export interface IApiError {
+export interface ApiError {
     errors: string[];
     httpCode: number | null;
     isJsonApiError: boolean;

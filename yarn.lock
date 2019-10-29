@@ -649,10 +649,10 @@
     react-native-safe-area-view "^0.14.1"
     react-native-screens "^1.0.0 || ^1.0.0-alpha"
 
-"@redux-offline/redux-offline@2.5.2":
-  version "2.5.2"
-  resolved "https://registry.yarnpkg.com/@redux-offline/redux-offline/-/redux-offline-2.5.2.tgz#f310623271ac47ec324b91377e5a15daf958bf4d"
-  integrity sha512-z/YJg/Ajr2bQXZUQZ5xlNixcG3d9AmH6MRQmYT/NxzPn7CI6bCfdrAd4BVzdUdqQ5ce7/CMftKXmNDlsjARdhA==
+"@redux-offline/redux-offline@2.5.2-native.1":
+  version "2.5.2-native.1"
+  resolved "https://registry.yarnpkg.com/@redux-offline/redux-offline/-/redux-offline-2.5.2-native.1.tgz#87603a0758191f57a7fc2112839a88b1c9534963"
+  integrity sha512-MyJuasz9Xi4jDKedClUJTf03KI//nV9lQdbM6V+usdt2q4VGktktNV2oGTQKQEt/dU5rFbAf7pbV/cJES9jVzw==
   dependencies:
     "@babel/runtime" "^7.5.5"
     redux-persist "^4.6.0"

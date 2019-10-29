@@ -34,7 +34,7 @@ Then add an async action that will be used to track the API call progress and ge
 
 ```typescript
 // redux/datastoreReducer.ts
-import { IApiError } from 'abyss';
+import { ApiError } from 'abyss';
 import { IDayModel } from 'models';
 import actionCreatorFactory from 'typescript-fsa';
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
@@ -42,7 +42,7 @@ import { reducerWithInitialState } from 'typescript-fsa-reducers';
 const actionCreator = actionCreatorFactory('datastore');
 
 export const DatastoreActions = {
-  refreshDay: actionCreator.async<{ day: IDayModel }, IDayModel, IApiError>('REFRESH_DAY')
+  refreshDay: actionCreator.async<{ day: IDayModel }, IDayModel, ApiError>('REFRESH_DAY')
 };
 
 export type State = Readonly<{

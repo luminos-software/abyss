@@ -1,7 +1,7 @@
 import { AxiosError } from 'axios';
 // import { ErrorNotification } from 'lib/ErrorNotification';
 import { Action, Middleware } from 'redux';
-import { Api, IApiAction, IApiError } from '../api/api';
+import { Api, ApiError, IApiAction } from '../api/api';
 import { datastore } from '../api/jsonapiStore';
 import { AbyssConfig } from '../config';
 
@@ -62,7 +62,7 @@ export const buildErrorPayload = (error: AxiosError) => {
     data: null
   };
   const isJsonApiError = !!(payload.data && payload.data.errors);
-  const errorPayload: IApiError = {
+  const errorPayload: ApiError = {
     errors: isJsonApiError ? payload.data.errors.map((errorObj: any) => errorObj.detail) : [payload.statusText], // tslint:disable-line:no-any
     httpCode: payload.status,
     isJsonApiError,
