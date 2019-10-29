@@ -1,4 +1,4 @@
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import { AbyssConfig } from '../config';
 
 export const replaceColors = (newColors: typeof AbyssConfig.theme.colors) => {

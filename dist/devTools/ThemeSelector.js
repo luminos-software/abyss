@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const async_storage_1 = __importDefault(require("@react-native-community/async-storage"));
 const ramda_1 = __importDefault(require("ramda"));
 const react_1 = __importDefault(require("react"));
 const react_native_1 = require("react-native");
@@ -26,7 +27,7 @@ class ThemeSelector extends react_1.default.PureComponent {
             replaceColors_1.replaceColors(colors).then(() => require('react-native-restart').default.Restart());
         };
         this.resetColors = () => {
-            react_native_1.AsyncStorage.removeItem('theme.colors').then(() => require('react-native-restart').default.Restart());
+            async_storage_1.default.removeItem('theme.colors').then(() => require('react-native-restart').default.Restart());
         };
     }
     render() {

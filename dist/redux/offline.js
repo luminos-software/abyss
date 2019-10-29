@@ -3,20 +3,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const async_storage_1 = __importDefault(require("@react-native-community/async-storage"));
 const defaults_1 = __importDefault(require("@redux-offline/redux-offline/lib/defaults"));
-const react_native_1 = require("react-native");
 const config_1 = require("../config");
 const service_1 = require("../transloadit/service");
 const jsonapiDatastorePersistence_1 = require("./jsonapiDatastorePersistence");
 // clear the persist cache when reducerVersion changes (dev mostly)
-react_native_1.AsyncStorage.getItem('reducerVersion')
+async_storage_1.default.getItem('reducerVersion')
     .then(localVersion => {
     if (localVersion !== config_1.AbyssConfig.redux.reducerVersion) {
-        react_native_1.AsyncStorage.clear().then(() => react_native_1.AsyncStorage.setItem('reducerVersion', config_1.AbyssConfig.redux.reducerVersion));
+        async_storage_1.default.clear().then(() => async_storage_1.default.setItem('reducerVersion', config_1.AbyssConfig.redux.reducerVersion));
     }
 })
     .catch(() => {
-    react_native_1.AsyncStorage.setItem('reducerVersion', config_1.AbyssConfig.redux.reducerVersion);
+    async_storage_1.default.setItem('reducerVersion', config_1.AbyssConfig.redux.reducerVersion);
 });
 exports.offlineConfig = Object.assign(Object.assign({}, defaults_1.default), { effect: (effect, action) => {
         if (action.type === 'OFFLINE_API_CALL') {

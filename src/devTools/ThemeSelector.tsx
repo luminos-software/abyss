@@ -1,6 +1,7 @@
+import AsyncStorage from '@react-native-community/async-storage';
 import R from 'ramda';
 import React from 'react';
-import { AsyncStorage, ScrollView, Text, TouchableWithoutFeedback, View } from 'react-native';
+import { ScrollView, Text, TouchableWithoutFeedback, View } from 'react-native';
 import tinycolor, { ColorFormats } from 'tinycolor2';
 import { AbyssConfig } from '../config';
 import { Button } from './Button';

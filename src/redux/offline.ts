@@ -1,7 +1,7 @@
+import AsyncStorage from '@react-native-community/async-storage';
 import config from '@redux-offline/redux-offline/lib/defaults';
 import { Config } from '@redux-offline/redux-offline/lib/types';
 import { AxiosPromise } from 'axios';
-import { AsyncStorage } from 'react-native';
 import { AbyssConfig } from '../config';
 import { uploadFile } from '../transloadit/service';
 import { jsonapiDatastorePersistence } from './jsonapiDatastorePersistence';
