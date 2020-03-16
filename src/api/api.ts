@@ -1,4 +1,3 @@
-import { OfflineAction } from '@redux-offline/redux-offline/lib/types';
 import axios, { AxiosInstance, AxiosPromise, AxiosRequestConfig } from 'axios';
 import { AsyncActionCreators } from 'typescript-fsa';
 import { AbyssConfig } from '../config';
@@ -12,15 +11,6 @@ export interface IApiAction<T, P> {
   };
   promise: AxiosPromise<T>;
   params: P;
-}
-
-interface IOfflineApiAction<A, P> extends OfflineAction {
-  type: 'OFFLINE_API_CALL';
-  meta: {
-    offline: {
-      effect: { action: A; params: P; commit: string; rollback: string };
-    };
-  };
 }
 
 interface IJsonapiRequest<T> {
@@ -102,17 +92,6 @@ export const ApiActions = {
       },
       promise,
       params
-    };
-  },
-
-  offlineCall<A, P, S, E>(action: A, asyncAction: AsyncActionCreators<P, S, E>, params: P): IOfflineApiAction<A, P> {
-    return {
-      type: 'OFFLINE_API_CALL',
-      meta: {
-        offline: {
-          effect: { action, params, commit: asyncAction.done.type, rollback: asyncAction.failed.type }
-        }
-      }
     };
   }
 };

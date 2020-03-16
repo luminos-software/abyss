@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { offline } from '@redux-offline/redux-offline';
-import { Config } from '@redux-offline/redux-offline/lib/types';
+import AsyncStorage from '@react-native-community/async-storage';
 import R from 'ramda';
 import {
   Action,
@@ -15,15 +14,14 @@ import {
 } from 'redux';
 import { devToolsEnhancer } from 'redux-devtools-extension/developmentOnly';
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
+import { PersistConfig, persistReducer } from 'redux-persist';
 import { transloaditMiddleware } from '../transloadit/middleware';
 import { setTransloaditReduxStore } from '../transloadit/service';
 import { apiMiddleware } from './apiMiddleware';
 import { loggerMiddleware } from './loggerMiddleware';
-import { offlineConfig } from './offline';
-import * as offlineEpics from './offlineEpics';
 
-interface IReduxConfig {
-  offline: false | Partial<Config>;
+interface IReduxConfig<State extends Record<string, any>> {
+  offline: PersistConfig<State>;
   transloadit?: boolean;
   logger?: boolean;
 }
@@ -33,11 +31,9 @@ const compact = R.reject(R.isNil);
 export const createReduxStore = <State extends Record<string, any>>(
   epics: any,
   reducers: any,
-  config: IReduxConfig
+  config: IReduxConfig<State>
 ): Store<State, Action> => {
   const epicMiddleware = createEpicMiddleware<Action, Action, State>();
-
-  const offlineEnhancer = config.offline ? offline(R.mergeDeepRight(offlineConfig, config.offline) as Config) : null;
 
   const middlewares = compact([
     apiMiddleware,
@@ -46,20 +42,17 @@ export const createReduxStore = <State extends Record<string, any>>(
     config.logger ? loggerMiddleware : null
   ]) as Middleware[];
 
-  const enhancers = compact([
-    offlineEnhancer,
-    applyMiddleware(...middlewares),
-    devToolsEnhancer({})
-  ]) as StoreEnhancer[];
+  const enhancers = compact([applyMiddleware(...middlewares), devToolsEnhancer({})]) as StoreEnhancer[];
 
   const enhancer: StoreEnhancer<State> = compose(...enhancers);
   const reducer = combineReducers(reducers) as Reducer<State>;
+  const persistedReducer = persistReducer({ key: 'persist', storage: AsyncStorage, ...config.offline }, reducer);
 
-  const newStore: Store<State> = createStore(reducer, enhancer);
+  const newStore: Store<State> = createStore(persistedReducer, enhancer);
   store = newStore;
   config.transloadit && setTransloaditReduxStore(store);
 
-  epicMiddleware.run(combineEpics(...R.values(R.mergeAll([offlineEpics, epics]))));
+  epicMiddleware.run(combineEpics(...R.values(epics)));
 
   return newStore;
 };

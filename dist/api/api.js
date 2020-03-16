@@ -65,16 +65,6 @@ exports.ApiActions = {
             promise,
             params
         };
-    },
-    offlineCall(action, asyncAction, params) {
-        return {
-            type: 'OFFLINE_API_CALL',
-            meta: {
-                offline: {
-                    effect: { action, params, commit: asyncAction.done.type, rollback: asyncAction.failed.type }
-                }
-            }
-        };
     }
 };
 //# sourceMappingURL=api.js.map

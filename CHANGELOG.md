@@ -1,5 +1,13 @@
 ## Only breaking changes are listed here
 
+### 0.5.2
+
+Remove the offline support
+
+### 0.5.1
+
+Remove the navigation helpers
+
 ### 0.5.0
 
 Replace TSLint with ESLint

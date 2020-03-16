@@ -74,25 +74,6 @@ export const persistDay: Epic<Action, Action, IRootState> = action$ =>
   );
 ```
 
-### Offline support
-
-Mark the repository method as offline-capable in `config/abyss.ts`:
-
-```typescript
-const offlineCalls = {
-  'dayRepository.persistDay': dayRepository.persistDay
-};
-AbyssConfig.api.offlineCalls = offlineCalls;
-```
-
-And instead of dispatching `ApiActions.directCall`, use `ApiActions.offlineCall`:
-
-```typescript
-ApiActions.offlineCall('dayRepository.persistDay', DatastoreActions.refreshDay, {
-  day: state$.value.home.currentDay
-});
-```
-
 ### Clean the redux store
 
 Set a new `reducerVersion` in `config/abyss.ts`:
@@ -112,32 +93,6 @@ export const metrics = {
   ...getMetrics(),
   otherCustomMetric: 10
 };
-```
-
-### Navigation
-
-Create navigators:
-
-```typescript
-import { createStackNavigator } from 'abyss';
-
-export const Navigator = createStackNavigator({ Home: HomeScreen });
-```
-
-Create screens:
-
-```typescript
-import { StackScreen } from 'abyss';
-
-// also StackScreen.withoutHeader
-export const MedicinesScreen = StackScreen.withDefaultHeader(MedicinesConnected, {
-  headerTitle: 'Medicines',
-  // or connected to redux
-  // headerTitle: StackScreen.connectTitle<IRootState>(state => ({
-  //   title: state.data.user.name
-  // })),
-  headerLeft: <StackScreen.BackButton onPress={() => store.dispatch(...)} />
-});
 ```
 
 ### Transloadit
@@ -202,37 +157,6 @@ Api.setAuthToken(getUniqueID());
 Api.setHeader('Accept', 'application/json');
 ```
 
-### Offline support
-
-First configure the list of offline-capable calls (usually `config/abyss.ts`):
-
-```typescript
-const offlineCalls = {
-  'userRepository.persistUser': userRepository.persistUser,
-  'dayRepository.persistDay': dayRepository.persistDay
-};
-AbyssConfig.api.offlineCalls = offlineCalls;
-```
-
-Next configure an `ApiActions` wrapper that will give us typing based on those actions (usually `config/abyss.ts`):
-
-```typescript
-import { ApiActions as AbyssApiActions, Arguments, InferFromAxiosReturnType } from 'abyss';
-
-export const ApiActions = {
-  ...AbyssApiActions,
-  offlineCall<
-    C extends typeof offlineCalls,
-    A extends keyof C,
-    P extends Arguments<C[A]>,
-    S extends InferFromAxiosReturnType<C[A]>,
-    E
-  >(action: A, asyncAction: AsyncActionCreators<P, S, E>, params: P) {
-    return AbyssApiActions.offlineCall<A, P, S, E>(action, asyncAction, params);
-  }
-};
-```
-
 ### Typical Redux store
 
 ```typescript
@@ -252,31 +176,6 @@ export const store: Store<IRootState> = createReduxStore(epics, reducers, {
   logger: true,
   transloadit: true
 });
-```
-
-### Redux offline state
-
-```typescript
-import { OfflineState } from 'abyss';
-import { reducer as homeReducer, State as HomeState } from '../modules/home/reducer';
-
-export const reducers = {
-  home: homeReducer
-};
-
-export interface IRootState {
-  home: HomeState;
-  offline: OfflineState;
-}
-```
-
-### Navigation header styles
-
-```typescript
-// config/abyss.ts
-import { StackScreen } from 'abyss';
-
-StackScreen.setDefaults({ headerStyle: { backgroundColor: 'red' } });
 ```
 
 ### Transloadit
