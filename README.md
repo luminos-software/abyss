@@ -169,15 +169,15 @@ Assuming Transloadit is enabled in the store sonfig, simply dispatch an action:
   "exclude": ["android", "ios", "build", "node_modules", "scripts", "assets"]
 }
 
-// .eslintrc.json
-{
-  "extends": "./node_modules/abyss/config/tslint.json"
-}
+// .eslintrc.js
+module.exports = {
+  extends: './node_modules/abyss/config/.eslintrc.js',
+};
 
-// .babelrc
-{
-  "extends": "./node_modules/abyss/config/.babelrc"
-}
+// babel.config.js
+module.exports = {
+  extends: './node_modules/abyss/config/.babelrc',
+};
 ```
 
 ### Direct API interaction
