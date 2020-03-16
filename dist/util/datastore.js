@@ -1,9 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const jsonapi_datastore_1 = require("jsonapi-datastore");
 const jsonapiStore_1 = require("../api/jsonapiStore");
 const cloneModel = (model) => {
-    if (!(model instanceof jsonapi_datastore_1.JsonApiDataStoreModel)) {
+    if (!(model instanceof jsonapiStore_1.JsonApiDataStoreModel)) {
         return model;
     }
     const serialized = model.serialize();

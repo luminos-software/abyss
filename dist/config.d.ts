@@ -1,6 +1,6 @@
 import { AxiosPromise } from 'axios';
 import { ActionCreator } from 'typescript-fsa';
-import { IApiError } from './api/api';
+import { ApiError } from './api/api';
 interface IAbyssConfig {
     api: {
         serverUrl: string;
@@ -8,7 +8,7 @@ interface IAbyssConfig {
         timeout: number;
         offlineCalls: Record<string, (...args: any[]) => AxiosPromise>;
         authCalls: string[];
-        onError?: (error: IApiError) => void;
+        onError?: (error: ApiError) => void;
     };
     redux: {
         reducerVersion: string;

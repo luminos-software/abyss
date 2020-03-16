@@ -117,7 +117,7 @@ export const ApiActions = {
   }
 };
 
-export interface IApiError {
+export interface ApiError {
   errors: string[];
   httpCode: number | null;
   isJsonApiError: boolean;

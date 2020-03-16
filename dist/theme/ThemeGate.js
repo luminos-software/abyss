@@ -3,8 +3,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const async_storage_1 = __importDefault(require("@react-native-community/async-storage"));
 const react_1 = __importDefault(require("react"));
-const react_native_1 = require("react-native");
 const config_1 = require("../config");
 class ThemeGate extends react_1.default.PureComponent {
     constructor() {
@@ -12,7 +12,7 @@ class ThemeGate extends react_1.default.PureComponent {
         this.state = { finished: false };
     }
     componentDidMount() {
-        react_native_1.AsyncStorage.getItem('theme.colors')
+        async_storage_1.default.getItem('theme.colors')
             .then(jsonColors => {
             const storedColors = JSON.parse(jsonColors || '{}');
             Object.keys(storedColors).forEach(color => {

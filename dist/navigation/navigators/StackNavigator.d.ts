@@ -1,6 +1,7 @@
 import React from 'react';
-import { HeaderBackButtonProps, NavigationRouteConfigMap, NavigationStackScreenOptions, StackNavigatorConfig } from 'react-navigation';
-export declare const createStackNavigator: (screens: NavigationRouteConfigMap, options?: StackNavigatorConfig) => import("react-navigation").NavigationContainer;
+import { NavigationComponent } from 'react-navigation';
+import { createStackNavigator as RNcreateStackNavigator, HeaderBackButtonProps, NavigationStackOptions } from 'react-navigation-stack';
+export declare const createStackNavigator: typeof RNcreateStackNavigator;
 interface ICustomNavigationParams {
     disableBackButton?: boolean;
     safeAreaColor?: string;
@@ -8,9 +9,9 @@ interface ICustomNavigationParams {
     safeAreaHideBottom?: boolean;
 }
 export declare const StackScreen: {
-    setDefaults(defaults: NavigationStackScreenOptions): void;
-    withoutHeader(Component: React.ComponentType<any>, options?: NavigationStackScreenOptions & ICustomNavigationParams): any;
-    withDefaultHeader(Component: React.ComponentType<any>, options?: NavigationStackScreenOptions & ICustomNavigationParams): any;
+    setDefaults(defaults: NavigationStackOptions): void;
+    withoutHeader(Component: React.ComponentType<any>, options?: NavigationStackOptions & ICustomNavigationParams): NavigationComponent<{}, {}>;
+    withDefaultHeader(Component: React.ComponentType<any>, options?: NavigationStackOptions & ICustomNavigationParams): NavigationComponent<{}, {}>;
     BackButton: (props: HeaderBackButtonProps) => JSX.Element;
 };
 export {};

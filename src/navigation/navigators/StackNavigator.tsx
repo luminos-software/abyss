@@ -3,27 +3,25 @@
 import R from 'ramda';
 import React from 'react';
 import { Platform, ViewStyle } from 'react-native';
+import { NavigationComponent, SafeAreaView } from 'react-navigation';
+import { AndroidBackHandler } from 'react-navigation-backhandler';
 import {
   createStackNavigator as RNcreateStackNavigator,
   HeaderBackButton,
   HeaderBackButtonProps,
-  NavigationComponent,
-  NavigationRouteConfigMap,
-  NavigationScreenConfig,
-  NavigationScreenProp,
-  NavigationStackScreenOptions,
-  SafeAreaView,
-  StackNavigatorConfig
-} from 'react-navigation';
-import { AndroidBackHandler } from 'react-navigation-backhandler';
+  NavigationStackOptions,
+  NavigationStackProp
+} from 'react-navigation-stack';
 import { getMetrics } from '../../theme/metrics';
 import { Navigation } from '../service';
 
-const NAV_OPTIONS_DEFAULTS: NavigationScreenConfig<NavigationStackScreenOptions> = {
+// tslint:disable:no-any
+
+const NAV_OPTIONS_DEFAULTS: NavigationStackOptions = {
   gesturesEnabled: false
 };
 
-let SCREEN_WITH_HEADER_DEFAULTS: NavigationStackScreenOptions = {
+let SCREEN_WITH_HEADER_DEFAULTS: NavigationStackOptions = {
   headerStyle: {
     height: getMetrics().header.height,
     paddingTop: 20
@@ -37,12 +35,12 @@ let SCREEN_WITH_HEADER_DEFAULTS: NavigationStackScreenOptions = {
   headerBackTitle: ' '
 };
 
-const SCREEN_WITHOUT_HEADER_DEFAULTS: NavigationStackScreenOptions = {
+const SCREEN_WITHOUT_HEADER_DEFAULTS: NavigationStackOptions = {
   header: null,
   headerBackTitle: ' '
 };
 
-export const createStackNavigator = (screens: NavigationRouteConfigMap, options: StackNavigatorConfig = {}) =>
+export const createStackNavigator: typeof RNcreateStackNavigator = (screens, options = {}) =>
   RNcreateStackNavigator(screens, {
     navigationOptions: NAV_OPTIONS_DEFAULTS,
     ...options
@@ -56,17 +54,11 @@ interface ICustomNavigationParams {
 }
 
 export const StackScreen = {
-  setDefaults(defaults: NavigationStackScreenOptions) {
-    SCREEN_WITH_HEADER_DEFAULTS = R.mergeDeepRight(
-      SCREEN_WITH_HEADER_DEFAULTS,
-      defaults
-    ) as NavigationStackScreenOptions;
+  setDefaults(defaults: NavigationStackOptions) {
+    SCREEN_WITH_HEADER_DEFAULTS = R.mergeDeepRight(SCREEN_WITH_HEADER_DEFAULTS, defaults);
   },
 
-  withoutHeader(
-    Component: React.ComponentType<any>,
-    options: NavigationStackScreenOptions & ICustomNavigationParams = {}
-  ) {
+  withoutHeader(Component: React.ComponentType<any>, options: NavigationStackOptions & ICustomNavigationParams = {}) {
     const { disableBackButton, safeAreaColor, safeAreaHideTop, safeAreaHideBottom, ...navigationOptions } = options;
     return createStackScreen(
       Component,
@@ -78,19 +70,15 @@ export const StackScreen = {
 
   withDefaultHeader(
     Component: React.ComponentType<any>,
-    options: NavigationStackScreenOptions & ICustomNavigationParams = {}
+    options: NavigationStackOptions & ICustomNavigationParams = {}
   ) {
     const { disableBackButton, safeAreaColor, safeAreaHideTop, safeAreaHideBottom, ...navigationOptions } = options;
-    return createStackScreen(
-      Component,
-      R.mergeDeepRight(SCREEN_WITH_HEADER_DEFAULTS, navigationOptions) as NavigationStackScreenOptions,
-      {
-        disableBackButton,
-        safeAreaColor,
-        safeAreaHideTop: true,
-        safeAreaHideBottom
-      }
-    );
+    return createStackScreen(Component, R.mergeDeepRight(SCREEN_WITH_HEADER_DEFAULTS, navigationOptions), {
+      disableBackButton,
+      safeAreaColor,
+      safeAreaHideTop: true,
+      safeAreaHideBottom
+    });
   },
 
   // eslint-disable-next-line react/display-name
@@ -109,12 +97,12 @@ export const StackScreen = {
 
 const createStackScreen = (
   Component: React.ComponentType<any>,
-  options: NavigationStackScreenOptions = {},
+  options: NavigationStackOptions = {},
   customOptions: ICustomNavigationParams = {},
   safeAreaStyle: ViewStyle = {}
-): NavigationComponent =>
-  class extends React.Component<{ navigation: NavigationScreenProp<{}> }> {
-    static navigationOptions: NavigationStackScreenOptions = { ...options };
+): NavigationComponent<{}, {}> =>
+  class extends React.Component<{ navigation: NavigationStackProp }> {
+    static navigationOptions: NavigationStackOptions = { ...options };
     static displayName = 'AbyssStackScreen';
 
     render() {
