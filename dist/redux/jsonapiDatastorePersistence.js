@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// tslint:disable:no-any
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const jsonapi_datastore_1 = require("jsonapi-datastore");
 const ramda_1 = __importDefault(require("ramda"));
 const redux_persist_1 = require("redux-persist");

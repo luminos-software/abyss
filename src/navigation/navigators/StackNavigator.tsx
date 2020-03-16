@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import R from 'ramda';
 import React from 'react';
 import { Platform, ViewStyle } from 'react-native';
@@ -10,15 +12,12 @@ import {
   NavigationScreenConfig,
   NavigationScreenProp,
   NavigationStackScreenOptions,
-  OverriddenNavigationStackScreenOptions,
   SafeAreaView,
   StackNavigatorConfig
 } from 'react-navigation';
 import { AndroidBackHandler } from 'react-navigation-backhandler';
 import { getMetrics } from '../../theme/metrics';
 import { Navigation } from '../service';
-
-// tslint:disable:no-any
 
 const NAV_OPTIONS_DEFAULTS: NavigationScreenConfig<NavigationStackScreenOptions> = {
   gesturesEnabled: false
@@ -58,12 +57,15 @@ interface ICustomNavigationParams {
 
 export const StackScreen = {
   setDefaults(defaults: NavigationStackScreenOptions) {
-    SCREEN_WITH_HEADER_DEFAULTS = R.mergeDeepRight(SCREEN_WITH_HEADER_DEFAULTS, defaults);
+    SCREEN_WITH_HEADER_DEFAULTS = R.mergeDeepRight(
+      SCREEN_WITH_HEADER_DEFAULTS,
+      defaults
+    ) as NavigationStackScreenOptions;
   },
 
   withoutHeader(
     Component: React.ComponentType<any>,
-    options: OverriddenNavigationStackScreenOptions & ICustomNavigationParams = {}
+    options: NavigationStackScreenOptions & ICustomNavigationParams = {}
   ) {
     const { disableBackButton, safeAreaColor, safeAreaHideTop, safeAreaHideBottom, ...navigationOptions } = options;
     return createStackScreen(
@@ -76,17 +78,22 @@ export const StackScreen = {
 
   withDefaultHeader(
     Component: React.ComponentType<any>,
-    options: OverriddenNavigationStackScreenOptions & ICustomNavigationParams = {}
+    options: NavigationStackScreenOptions & ICustomNavigationParams = {}
   ) {
     const { disableBackButton, safeAreaColor, safeAreaHideTop, safeAreaHideBottom, ...navigationOptions } = options;
-    return createStackScreen(Component, R.mergeDeepRight(SCREEN_WITH_HEADER_DEFAULTS, navigationOptions), {
-      disableBackButton,
-      safeAreaColor,
-      safeAreaHideTop: true,
-      safeAreaHideBottom
-    });
+    return createStackScreen(
+      Component,
+      R.mergeDeepRight(SCREEN_WITH_HEADER_DEFAULTS, navigationOptions) as NavigationStackScreenOptions,
+      {
+        disableBackButton,
+        safeAreaColor,
+        safeAreaHideTop: true,
+        safeAreaHideBottom
+      }
+    );
   },
 
+  // eslint-disable-next-line react/display-name
   BackButton: (props: HeaderBackButtonProps) => (
     <HeaderBackButton
       title={SCREEN_WITH_HEADER_DEFAULTS.headerBackTitle!}
@@ -102,12 +109,13 @@ export const StackScreen = {
 
 const createStackScreen = (
   Component: React.ComponentType<any>,
-  options: OverriddenNavigationStackScreenOptions = {},
+  options: NavigationStackScreenOptions = {},
   customOptions: ICustomNavigationParams = {},
   safeAreaStyle: ViewStyle = {}
 ): NavigationComponent =>
   class extends React.Component<{ navigation: NavigationScreenProp<{}> }> {
-    static navigationOptions: OverriddenNavigationStackScreenOptions = { ...options };
+    static navigationOptions: NavigationStackScreenOptions = { ...options };
+    static displayName = 'AbyssStackScreen';
 
     render() {
       const screen = (

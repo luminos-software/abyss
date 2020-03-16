@@ -1,5 +1,9 @@
 ## Only breaking changes are listed here
 
+### 0.5.0
+
+Replace TSLint with ESLint
+
 ### 0.4.8
 
 Add `parseLicenses`.

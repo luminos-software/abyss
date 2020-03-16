@@ -29,8 +29,7 @@ export class ThemeGate extends React.PureComponent<
   render() {
     if (this.state.finished) {
       return this.props.render ? this.props.render() : this.props.children;
-    } else {
-      return null;
     }
+    return null;
   }
 }

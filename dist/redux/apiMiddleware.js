@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const api_1 = require("../api/api");
 const jsonapiStore_1 = require("../api/jsonapiStore");
 const config_1 = require("../config");
-// tslint:disable-next-line:no-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const isApiAction = (action) => action.type === 'API_CALL';
 exports.apiMiddleware = () => next => action => {
     if (!isApiAction(action)) {
@@ -35,16 +35,14 @@ exports.apiMiddleware = () => next => action => {
     });
     return action;
 };
-// tslint:disable-next-line:no-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 exports.getSuccessResult = (data) => {
     if (data.data) {
         // jsonapi
         const result = jsonapiStore_1.datastore.syncWithMeta(data);
         return result.data;
     }
-    else {
-        return data;
-    }
+    return data;
 };
 exports.buildErrorPayload = (error) => {
     const payload = error.response || {
@@ -54,6 +52,7 @@ exports.buildErrorPayload = (error) => {
     };
     const isJsonApiError = !!(payload.data && payload.data.errors);
     const errorPayload = {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         errors: isJsonApiError ? payload.data.errors.map((errorObj) => errorObj.detail) : [payload.statusText],
         httpCode: payload.status,
         isJsonApiError,

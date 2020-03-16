@@ -5,7 +5,7 @@ import { Api, IApiAction, IApiError } from '../api/api';
 import { datastore } from '../api/jsonapiStore';
 import { AbyssConfig } from '../config';
 
-// tslint:disable-next-line:no-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const isApiAction = (action: Action): action is IApiAction<any, any> => action.type === 'API_CALL';
 
 export const apiMiddleware: Middleware = () => next => action => {
@@ -44,15 +44,14 @@ export const apiMiddleware: Middleware = () => next => action => {
   return action;
 };
 
-// tslint:disable-next-line:no-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getSuccessResult = (data: any) => {
   if (data.data) {
     // jsonapi
     const result = datastore.syncWithMeta(data);
     return result.data;
-  } else {
-    return data;
   }
+  return data;
 };
 
 export const buildErrorPayload = (error: AxiosError) => {
@@ -63,7 +62,8 @@ export const buildErrorPayload = (error: AxiosError) => {
   };
   const isJsonApiError = !!(payload.data && payload.data.errors);
   const errorPayload: IApiError = {
-    errors: isJsonApiError ? payload.data.errors.map((errorObj: any) => errorObj.detail) : [payload.statusText], // tslint:disable-line:no-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    errors: isJsonApiError ? payload.data.errors.map((errorObj: any) => errorObj.detail) : [payload.statusText],
     httpCode: payload.status,
     isJsonApiError,
     data: payload.data,

@@ -121,6 +121,7 @@ export interface IApiError {
   errors: string[];
   httpCode: number | null;
   isJsonApiError: boolean;
-  data: any; // tslint:disable-line:no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data: any;
   config: AxiosRequestConfig;
 }

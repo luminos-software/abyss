@@ -1,8 +1,8 @@
 import { Dimensions, NativeModules, PixelRatio, Platform } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
-const HEADER_HEIGHT = Platform.select({ ios: 44, android: 74 });
-const STATUSBAR_DEFAULT_HEIGHT = Platform.select({ ios: 20, android: 0 });
+const HEADER_HEIGHT = Platform.select({ ios: 44, android: 74 })!;
+const STATUSBAR_DEFAULT_HEIGHT = Platform.select({ ios: 20, android: 0 })!;
 
 // iphone x has a different statusbar height
 if (Platform.OS === 'ios') {

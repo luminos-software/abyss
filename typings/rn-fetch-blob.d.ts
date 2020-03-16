@@ -424,7 +424,6 @@ declare module 'rn-fetch-blob' {
 
   type Encoding = 'utf8' | 'ascii' | 'base64';
 
-  /* tslint:disable-next-line interface-name*/
   export interface IOSApi {
     /**
      * Open a file in {@link https://developer.apple.com/reference/uikit/uidocumentinteractioncontroller UIDocumentInteractionController},

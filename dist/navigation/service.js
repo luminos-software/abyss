@@ -11,7 +11,7 @@ const getNavigationScreen = (navState) => {
 };
 const dispatch = (action) => {
     if (__DEV__) {
-        // tslint:disable-next-line
+        // eslint-disable-next-line
         console.log(`Navigation action: ${action.type} ${action.routeName}`, action.params);
     }
     return (navigator && navigator.dispatch(action)) || false;
@@ -25,7 +25,8 @@ exports.Navigation = {
             if (!navigator) {
                 return null;
             }
-            navState = navigator.state.nav; // tslint:disable-line:no-any
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            navState = navigator.state.nav;
         }
         return getNavigationScreen(navState);
     },

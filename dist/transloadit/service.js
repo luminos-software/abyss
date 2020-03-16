@@ -8,7 +8,7 @@ const moment_1 = __importDefault(require("moment"));
 const api_1 = require("../api/api");
 const config_1 = require("../config");
 const API_URL = 'https://api2.transloadit.com';
-const fetchBlob = () => require('rn-fetch-blob').default; // tslint:disable-line:no-require-imports
+const fetchBlob = () => require('rn-fetch-blob').default;
 const generateParams = (template) => {
     const expiresAt = moment_1.default()
         .add(3, 'hours')
@@ -18,7 +18,9 @@ const generateParams = (template) => {
             key: config_1.AbyssConfig.transloadit.key,
             expires: expiresAt.format('YYYY/MM/DD HH:mm:ss+00:00')
         },
+        // eslint-disable-next-line @typescript-eslint/camelcase
         template_id: template,
+        // eslint-disable-next-line @typescript-eslint/camelcase
         notify_url: config_1.AbyssConfig.transloadit.notifiyUrl
     };
 };

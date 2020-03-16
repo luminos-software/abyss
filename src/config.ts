@@ -7,7 +7,7 @@ interface IAbyssConfig {
     serverUrl: string;
     prefix: string;
     timeout: number;
-    // tslint:disable-next-line:no-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     offlineCalls: Record<string, (...args: any[]) => AxiosPromise>;
     authCalls: string[];
     onError?: (error: IApiError) => void;

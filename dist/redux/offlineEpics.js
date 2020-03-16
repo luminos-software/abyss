@@ -8,14 +8,14 @@ exports.offlineRollback = action$ => action$.pipe(operators_1.filter(offlineRedu
     const effect = meta.offlineAction.meta.offline.effect;
     return {
         type: effect.rollback,
-        // tslint:disable-next-line:no-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         payload: { params: effect.params, error: apiMiddleware_1.buildErrorPayload(action.payload), offline: true }
     };
 }));
 exports.offlineCommit = action$ => action$.pipe(operators_1.filter(offlineReducer_1.OfflineActions.commit.match), operators_1.map(action => {
     const meta = action.meta;
     const effect = meta.offlineAction.meta.offline.effect;
-    // tslint:disable-next-line:no-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const payload = action.payload;
     return {
         type: effect.commit,

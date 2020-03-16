@@ -8,7 +8,7 @@ import { AbyssConfig } from '../config';
 
 const API_URL = 'https://api2.transloadit.com';
 
-const fetchBlob = (): FetchBlob => require('rn-fetch-blob').default; // tslint:disable-line:no-require-imports
+const fetchBlob = (): FetchBlob => require('rn-fetch-blob').default;
 
 const generateParams = (template: string) => {
   const expiresAt = moment()
@@ -19,7 +19,9 @@ const generateParams = (template: string) => {
       key: AbyssConfig.transloadit.key,
       expires: expiresAt.format('YYYY/MM/DD HH:mm:ss+00:00')
     },
+    // eslint-disable-next-line @typescript-eslint/camelcase
     template_id: template,
+    // eslint-disable-next-line @typescript-eslint/camelcase
     notify_url: AbyssConfig.transloadit.notifiyUrl
   };
 };

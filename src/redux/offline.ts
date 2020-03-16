@@ -37,7 +37,7 @@ export const offlineConfig: Config = {
   }
 };
 
-// tslint:disable-next-line:no-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const getApiCall = (action: keyof typeof AbyssConfig.api.offlineCalls): ((params: any) => AxiosPromise) => {
   const call = AbyssConfig.api.offlineCalls[action];
   if (!call) {

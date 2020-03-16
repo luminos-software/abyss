@@ -5,6 +5,6 @@ interface IReduxConfig {
     transloadit?: boolean;
     logger?: boolean;
 }
-export declare function createReduxStore<State>(epics: any, reducers: any, config: IReduxConfig): Store<State, Action>;
+export declare const createReduxStore: <State extends Record<string, any>>(epics: any, reducers: any, config: IReduxConfig) => Store<State, Action<any>>;
 export declare let store: Store | null;
 export {};

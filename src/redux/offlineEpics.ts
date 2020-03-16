@@ -26,7 +26,7 @@ export const offlineRollback: Epic<Action, Action> = action$ =>
 
       return {
         type: effect.rollback,
-        // tslint:disable-next-line:no-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         payload: { params: effect.params, error: buildErrorPayload(action.payload as any), offline: true }
       };
     })
@@ -38,7 +38,7 @@ export const offlineCommit: Epic<Action, Action> = action$ =>
     map(action => {
       const meta = action.meta as IOfflineActionMeta;
       const effect = meta.offlineAction.meta.offline.effect as IEffect;
-      // tslint:disable-next-line:no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const payload: AxiosResponse = action.payload as any;
 
       return {

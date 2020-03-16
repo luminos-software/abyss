@@ -18,7 +18,7 @@ react_native_1.AsyncStorage.getItem('reducerVersion')
     .catch(() => {
     react_native_1.AsyncStorage.setItem('reducerVersion', config_1.AbyssConfig.redux.reducerVersion);
 });
-exports.offlineConfig = Object.assign({}, defaults_1.default, { effect: (effect, action) => {
+exports.offlineConfig = Object.assign(Object.assign({}, defaults_1.default), { effect: (effect, action) => {
         if (action.type === 'OFFLINE_API_CALL') {
             return getApiCall(effect.action)(effect.params);
         }
@@ -30,7 +30,7 @@ exports.offlineConfig = Object.assign({}, defaults_1.default, { effect: (effect,
         transforms: [jsonapiDatastorePersistence_1.jsonapiDatastorePersistence],
         debug: __DEV__
     } });
-// tslint:disable-next-line:no-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const getApiCall = (action) => {
     const call = config_1.AbyssConfig.api.offlineCalls[action];
     if (!call) {

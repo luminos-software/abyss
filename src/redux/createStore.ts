@@ -1,7 +1,18 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { offline } from '@redux-offline/redux-offline';
 import { Config } from '@redux-offline/redux-offline/lib/types';
 import R from 'ramda';
-import { Action, applyMiddleware, combineReducers, compose, createStore, Middleware, Reducer, Store, StoreEnhancer } from 'redux';
+import {
+  Action,
+  applyMiddleware,
+  combineReducers,
+  compose,
+  createStore,
+  Middleware,
+  Reducer,
+  Store,
+  StoreEnhancer
+} from 'redux';
 import { devToolsEnhancer } from 'redux-devtools-extension/developmentOnly';
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
 import { transloaditMiddleware } from '../transloadit/middleware';
@@ -19,8 +30,11 @@ interface IReduxConfig {
 
 const compact = R.reject(R.isNil);
 
-// tslint:disable-next-line:no-any
-export function createReduxStore<State>(epics: any, reducers: any, config: IReduxConfig): Store<State, Action> {
+export const createReduxStore = <State extends Record<string, any>>(
+  epics: any,
+  reducers: any,
+  config: IReduxConfig
+): Store<State, Action> => {
   const epicMiddleware = createEpicMiddleware<Action, Action, State>();
 
   const offlineEnhancer = config.offline ? offline(R.mergeDeepRight(offlineConfig, config.offline) as Config) : null;
@@ -39,7 +53,7 @@ export function createReduxStore<State>(epics: any, reducers: any, config: IRedu
   ]) as StoreEnhancer[];
 
   const enhancer: StoreEnhancer<State> = compose(...enhancers);
-  const reducer: Reducer<State> = combineReducers(reducers);
+  const reducer = combineReducers(reducers) as Reducer<State>;
 
   const newStore: Store<State> = createStore(reducer, enhancer);
   store = newStore;
@@ -48,6 +62,6 @@ export function createReduxStore<State>(epics: any, reducers: any, config: IRedu
   epicMiddleware.run(combineEpics(...R.values(R.mergeAll([offlineEpics, epics]))));
 
   return newStore;
-}
+};
 
 export let store: Store | null = null;
