@@ -3,7 +3,7 @@ import { PersistConfig } from 'redux-persist';
 interface IReduxConfig<State extends Record<string, any>> {
     offline: {
         persistCallback?: () => void;
-        persistConfig?: PersistConfig<State>;
+        persistOptions?: Partial<PersistConfig<State>>;
     };
     transloadit?: boolean;
     logger?: boolean;

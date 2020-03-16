@@ -23,7 +23,7 @@ import { loggerMiddleware } from './loggerMiddleware';
 interface IReduxConfig<State extends Record<string, any>> {
   offline: {
     persistCallback?: () => void;
-    persistConfig?: PersistConfig<State>;
+    persistOptions?: Partial<PersistConfig<State>>;
   };
   transloadit?: boolean;
   logger?: boolean;
@@ -49,7 +49,10 @@ export const createReduxStore = <State extends Record<string, any>>(
 
   const enhancer: StoreEnhancer<State> = compose(...enhancers);
   const reducer = combineReducers(reducers) as Reducer<State>;
-  const persistedReducer = persistReducer({ key: 'persist', storage: AsyncStorage, ...config.offline }, reducer);
+  const persistedReducer = persistReducer(
+    { key: 'persist', storage: AsyncStorage, ...config.offline.persistOptions },
+    reducer
+  );
 
   const newStore: Store<State> = createStore(persistedReducer, enhancer);
   persistStore(newStore, null, config.offline.persistCallback);

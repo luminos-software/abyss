@@ -26,7 +26,7 @@ exports.createReduxStore = (epics, reducers, config) => {
     const enhancers = compact([redux_1.applyMiddleware(...middlewares), developmentOnly_1.devToolsEnhancer({})]);
     const enhancer = redux_1.compose(...enhancers);
     const reducer = redux_1.combineReducers(reducers);
-    const persistedReducer = redux_persist_1.persistReducer(Object.assign({ key: 'persist', storage: async_storage_1.default }, config.offline), reducer);
+    const persistedReducer = redux_persist_1.persistReducer(Object.assign({ key: 'persist', storage: async_storage_1.default }, config.offline.persistOptions), reducer);
     const newStore = redux_1.createStore(persistedReducer, enhancer);
     redux_persist_1.persistStore(newStore, null, config.offline.persistCallback);
     exports.store = newStore;
