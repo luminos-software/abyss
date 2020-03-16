@@ -14,14 +14,17 @@ import {
 } from 'redux';
 import { devToolsEnhancer } from 'redux-devtools-extension/developmentOnly';
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
-import { PersistConfig, persistReducer } from 'redux-persist';
+import { PersistConfig, persistReducer, persistStore } from 'redux-persist';
 import { transloaditMiddleware } from '../transloadit/middleware';
 import { setTransloaditReduxStore } from '../transloadit/service';
 import { apiMiddleware } from './apiMiddleware';
 import { loggerMiddleware } from './loggerMiddleware';
 
 interface IReduxConfig<State extends Record<string, any>> {
-  offline: PersistConfig<State>;
+  offline: {
+    persistCallback?: () => void;
+    persistConfig?: PersistConfig<State>;
+  };
   transloadit?: boolean;
   logger?: boolean;
 }
@@ -49,6 +52,8 @@ export const createReduxStore = <State extends Record<string, any>>(
   const persistedReducer = persistReducer({ key: 'persist', storage: AsyncStorage, ...config.offline }, reducer);
 
   const newStore: Store<State> = createStore(persistedReducer, enhancer);
+  persistStore(newStore, null, config.offline.persistCallback);
+
   store = newStore;
   config.transloadit && setTransloaditReduxStore(store);
 

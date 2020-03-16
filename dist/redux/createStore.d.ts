@@ -1,7 +1,10 @@
 import { Action, Store } from 'redux';
 import { PersistConfig } from 'redux-persist';
 interface IReduxConfig<State extends Record<string, any>> {
-    offline: PersistConfig<State>;
+    offline: {
+        persistCallback?: () => void;
+        persistConfig?: PersistConfig<State>;
+    };
     transloadit?: boolean;
     logger?: boolean;
 }

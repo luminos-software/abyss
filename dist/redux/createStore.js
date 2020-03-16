@@ -28,6 +28,7 @@ exports.createReduxStore = (epics, reducers, config) => {
     const reducer = redux_1.combineReducers(reducers);
     const persistedReducer = redux_persist_1.persistReducer(Object.assign({ key: 'persist', storage: async_storage_1.default }, config.offline), reducer);
     const newStore = redux_1.createStore(persistedReducer, enhancer);
+    redux_persist_1.persistStore(newStore, null, config.offline.persistCallback);
     exports.store = newStore;
     config.transloadit && service_1.setTransloaditReduxStore(exports.store);
     epicMiddleware.run(redux_observable_1.combineEpics(...ramda_1.default.values(epics)));
