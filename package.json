@@ -23,7 +23,7 @@
     "axios": "0.19.2",
     "jshashes": "1.0.8",
     "jsonapi-datastore": "0.4.0-beta",
-    "moment": "2.24.0",
+    "moment": "2.29.2",
     "ramda": "0.27.0",
     "react-native-color": "0.0.10",
     "react-native-modal": "11.5.4",
